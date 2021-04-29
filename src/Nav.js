@@ -18,8 +18,8 @@ const Nav = () => {
                     <NavLink className="navbar-item" to="/languages">
                         Languages
                     </NavLink>
-                    <NavLink className="navbar-item" to="/">
-                        Flash Cards
+                    <NavLink className="navbar-item" to="/decks">
+                        Decks
                     </NavLink>
                 </div>
             <div className="navbar-end">
