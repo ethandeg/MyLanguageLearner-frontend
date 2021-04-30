@@ -1,16 +1,15 @@
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
+import LanguageIcon from "./LanguageIcon"
 const LanguageList = () => {
     const languages = useSelector(store => store.allLanguages) || undefined;
-    console.log("*************************************************************************************")
-    console.log(languages)
-    return(
-        <>
-        <ul>
-            {languages.map(lang => (
-                <li key={lang.code}>{lang.name}</li>
-            ))}
-        </ul>
-        </>
+    return (
+        <div className="container mt-6">
+            <div className="columns is-multiline">
+                {languages.map(lang => (
+                    <LanguageIcon language={lang} key={lang.code} />
+                ))}
+            </div>
+        </div>
     )
 }
 
