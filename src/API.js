@@ -1,17 +1,26 @@
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 class API {
-
-    static async getLanguages(){
+    static token;
+    static async getLanguages() {
         const res = await axios.get(`${BASE_URL}/language`)
         return res
     }
 
-    static async getUserInfo(){
+    static async getUserInfo() {
         const res = await axios.get(`${BASE_URL}/user/testuser`)
         console.log(res)
         return res
     }
+
+    static async register(userData) {
+        const res = await axios.post(`${BASE_URL}/auth/register`)
+        API.token = res.data._token
+        console.log(API.token)
+        console.log(res)
+        return res
+    }
+
 }
 
 
