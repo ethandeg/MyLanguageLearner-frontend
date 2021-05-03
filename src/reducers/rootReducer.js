@@ -1,4 +1,4 @@
-import {ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO} from "../actions/actionTypes"
+import { LOAD_USER_TOKEN, REMOVE_USER_INFO ,ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO} from "../actions/actionTypes"
 const INITIAL_STATE = {decks: [], allLanguages: [], userInfo: {}, userLanguages: []}
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -25,7 +25,13 @@ function rootReducer(state = INITIAL_STATE, action) {
         //     return { ...state, posts }
 
         case LOAD_USER_INFO:
-            return { ...state, userInfo: action.payload }
+            return { ...state, userInfo: {...action.payload, token: state.userInfo.token} }
+
+        case LOAD_USER_TOKEN:
+            return {...state, userInfo: {...state.userInfo, token: action.payload}}
+
+        case REMOVE_USER_INFO:
+            return {...state, userInfo: INITIAL_STATE.userInfo, decks: INITIAL_STATE.decks, userLanguages: INITIAL_STATE.userLanguages}
 
         // case LOAD_FULL_POST:
         //     return { ...state, posts: [...state.posts, action.payload] }

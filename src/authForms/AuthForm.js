@@ -1,10 +1,7 @@
 import { useState } from "react"
-import API from "../API"
-import {loadUserData} from "../actions/actions"
-import {useDispatch} from "react-redux"
-const AuthForm = () => {
+
+const AuthForm = ({submit}) => {
     const INITIAL_STATE = { username: '', password: '' }
-    const dispatch = useDispatch()
     const [formData, setFormData] = useState(INITIAL_STATE)
     const handleChange = e => {
         const { name, value } = e.target;
@@ -17,8 +14,7 @@ const AuthForm = () => {
     const handleSubmit = e => {
         e.preventDefault()
         try {
-            const res = await API.register(formData)
-            dispatch(loadUserData(formData.username))
+            const res = submit(formData)
             setFormData(INITIAL_STATE)
         } catch (e){
             console.log('err')
@@ -45,7 +41,7 @@ const AuthForm = () => {
                     </div>
                 </div>
 
-                <button className="button is-primary">Sign in</button>
+                <button className="button is-primary">Authenticate</button>
             </form>
         </div>
     )

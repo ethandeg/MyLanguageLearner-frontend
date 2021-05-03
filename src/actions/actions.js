@@ -1,4 +1,4 @@
-import {ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO} from "./actionTypes"
+import {LOAD_USER_TOKEN, REMOVE_USER_INFO,ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO} from "./actionTypes"
 import API from "../API"
 export function loadLanguages(){
     return async function(dispatch){
@@ -46,5 +46,31 @@ function loadUserDataDispatch(payload){
     return {
         type: LOAD_USER_INFO,
         payload
+    }
+}
+
+
+export function removeUserInfo(){
+    return async function(dispatch){
+        dispatch(removeUserInfoDispatch())
+    }
+}
+
+function removeUserInfoDispatch(){
+    return {
+        type: REMOVE_USER_INFO
+    }
+}
+
+export function loadUserToken(token){
+    return async function(dispatch){
+        dispatch(loadUserTokenDispatch(token))
+    }
+}
+
+function loadUserTokenDispatch(token){
+    return {
+        type: LOAD_USER_TOKEN,
+        payload: token
     }
 }

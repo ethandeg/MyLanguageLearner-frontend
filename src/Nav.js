@@ -1,5 +1,13 @@
-import { NavLink, Link } from "react-router-dom"
-const Nav = () => {
+import {useSelector} from "react-redux"
+import { NavLink, Link, useHistory } from "react-router-dom"
+const Nav = ({logout}) => {
+    const history = useHistory()
+    const handleLogout = () => {
+        logout()
+        history.push("/")
+    }
+    const token = useSelector(store => store.userInfo.token)
+    console.log(token)
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="container">
@@ -25,12 +33,21 @@ const Nav = () => {
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
+                                {token ?
+                                 <button onClick ={handleLogout} className="button is-danger">
+                                    <strong>Sign Out</strong>
+                                </button>
+                                    :
+
+                                    <>
                                 <Link className="button is-primary" to='/register'>
                                     <strong>Sign up</strong>
                                 </Link>
                                 <Link className="button is-light" to="/login">
                                     <strong>Log in</strong>
                                 </Link>
+                                </>
+                                    }
                             </div>
                         </div>
                     </div>

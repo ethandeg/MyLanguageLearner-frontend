@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import Nav from "./Nav"
-import { loadLanguages, loadUserData } from "./actions/actions"
+import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import API from "./API"
 import Routes from "./Routes"
 import jwt from "jsonwebtoken"
+
 function App() {
 
   //check local storage for token
@@ -28,18 +29,41 @@ function App() {
     if(token){
       const {username} = jwt.decode(token)
       dispatch(loadUserData(username))
+      dispatch(loadUserToken(token))
     }
 
     setIsLoaded(true)
   }, [dispatch])
+
+
+
+  const login = async (userData) => {
+    const res = await API.login(userData)
+    dispatch(loadUserData(userData.username))
+    dispatch(loadUserToken(res.data._token))
+    return res
+  }
+
+  const register = async (userData) => {
+    const res = await API.register(userData)
+    dispatch(loadUserData(userData.username))
+    dispatch(loadUserToken(res.data._token))
+    return res
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    //empty user info from redux
+    dispatch(removeUserInfo())
+  }
 
   if (!isLoaded) {
     return <h1>Loading....</h1>
   }
   return (
     <>
-      <Nav />
-      <Routes />
+      <Nav logout={logout}/>
+      <Routes login={login} register={register}/>
     </>
   );
 }

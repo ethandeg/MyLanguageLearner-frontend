@@ -9,7 +9,6 @@ class API {
 
     static async getUserInfo(username) {
         const res = await axios.get(`${BASE_URL}/user/${username}`)
-        console.log(res)
         return res
     }
 
