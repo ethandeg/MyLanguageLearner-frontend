@@ -1,6 +1,7 @@
 import { useState } from "react"
-
+import {useHistory} from "react-router-dom"
 const AuthForm = ({submit}) => {
+    const history = useHistory()
     const INITIAL_STATE = { username: '', password: '' }
     const [formData, setFormData] = useState(INITIAL_STATE)
     const handleChange = e => {
@@ -16,6 +17,7 @@ const AuthForm = ({submit}) => {
         try {
             const res = submit(formData)
             setFormData(INITIAL_STATE)
+            history.push("/")
         } catch (e){
             console.log('err')
         }

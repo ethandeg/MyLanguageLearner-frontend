@@ -8,7 +8,6 @@ import Routes from "./Routes"
 import jwt from "jsonwebtoken"
 
 function App() {
-
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);
@@ -38,17 +37,28 @@ function App() {
 
 
   const login = async (userData) => {
-    const res = await API.login(userData)
-    dispatch(loadUserData(userData.username))
-    dispatch(loadUserToken(res.data._token))
-    return res
+    try {
+      const res = await API.login(userData)
+      //dispatch from the res, so it doesn't needlessly ping the server?
+      dispatch(loadUserData(userData.username))
+      dispatch(loadUserToken(res.data._token))
+      return res
+    } catch(e){
+      console.error('err')
+    }
+
+    
   }
 
   const register = async (userData) => {
-    const res = await API.register(userData)
-    dispatch(loadUserData(userData.username))
-    dispatch(loadUserToken(res.data._token))
-    return res
+    try {
+      const res = await API.register(userData)
+      dispatch(loadUserData(userData.username))
+      dispatch(loadUserToken(res.data._token))
+      return res
+    } catch(e){
+      console.error('err')
+    }
   }
 
   const logout = () => {
