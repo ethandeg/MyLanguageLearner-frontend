@@ -1,4 +1,5 @@
 import { useState } from "react"
+import API from "../API"
 const AuthForm = () => {
     const INITIAL_STATE = { username: '', password: '' }
     const [formData, setFormData] = useState(INITIAL_STATE)
@@ -10,10 +11,16 @@ const AuthForm = () => {
         }))
     }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        const res = API.register(formData)
+        setFormData(INITIAL_STATE)
+    }
+
     return (
         <div className="container">
 
-            <form className="box mt-6">
+            <form className="box mt-6" onSubmit={handleSubmit}>
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">

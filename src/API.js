@@ -14,7 +14,8 @@ class API {
     }
 
     static async register(userData) {
-        const res = await axios.post(`${BASE_URL}/auth/register`)
+        console.log(userData)
+        const res = await axios.post(`${BASE_URL}/auth/register`, userData)
         API.token = res.data._token
         console.log(API.token)
         console.log(res)
