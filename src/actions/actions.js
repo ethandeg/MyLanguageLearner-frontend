@@ -15,9 +15,9 @@ function loadLanguagesDispatch(payload){
     }
 }
 
-export function loadUserData(){
+export function loadUserData(uName){
     return async function(dispatch){
-        const res = await API.getUserInfo()
+        const res = await API.getUserInfo(uName)
         dispatch(loadDeckDispatch(res.data.deck))
         dispatch(loadUserLanguageDataDispatch(res.data.languages))
         const {username, experience, profilePic} = res.data

@@ -14,17 +14,15 @@ const AuthForm = () => {
         }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         try {
-            const res = await API.register(formData)
+            const res = await API.login(formData)
             dispatch(loadUserData(formData.username))
             setFormData(INITIAL_STATE)
         } catch (e){
             console.log('err')
         }
- 
-
     }
 
     return (
@@ -45,7 +43,7 @@ const AuthForm = () => {
                     </div>
                 </div>
 
-                <button className="button is-primary">Sign in</button>
+                <button className="button is-primary">Login</button>
             </form>
         </div>
     )

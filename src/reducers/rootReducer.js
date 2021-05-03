@@ -1,5 +1,6 @@
 import {ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO} from "../actions/actionTypes"
-function rootReducer(state, action) {
+const INITIAL_STATE = {decks: [], allLanguages: [], userInfo: {}, userLanguages: []}
+function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case ADD_ALL_LANGUAGES:
             return { ...state,  allLanguages:action.payload }

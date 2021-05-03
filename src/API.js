@@ -7,18 +7,23 @@ class API {
         return res
     }
 
-    static async getUserInfo() {
-        const res = await axios.get(`${BASE_URL}/user/testuser`)
+    static async getUserInfo(username) {
+        const res = await axios.get(`${BASE_URL}/user/${username}`)
         console.log(res)
         return res
     }
 
     static async register(userData) {
-        console.log(userData)
         const res = await axios.post(`${BASE_URL}/auth/register`, userData)
         API.token = res.data._token
-        console.log(API.token)
-        console.log(res)
+        localStorage.setItem('token', API.token)
+        return res
+    }
+
+    static async login(userData) {
+        const res = await axios.post(`${BASE_URL}/auth/login`, userData)
+        API.token = res.data._token
+        localStorage.setItem('token', API.token)
         return res
     }
 

@@ -28,7 +28,7 @@ const Nav = () => {
                                 <Link className="button is-primary" to='/register'>
                                     <strong>Sign up</strong>
                                 </Link>
-                                <Link className="button is-light" to="/register">
+                                <Link className="button is-light" to="/login">
                                     <strong>Log in</strong>
                                 </Link>
                             </div>
