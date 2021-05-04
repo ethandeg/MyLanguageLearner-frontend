@@ -1,23 +1,34 @@
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getFlashCards, loadUserToken } from "../actions/actions"
+import { getFlashCards } from "../actions/actions"
 import { useEffect } from "react"
+import FlashCardPreview from "./FlashCardPreview"
 const DeckPreview = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
-    const deck = useSelector(state => state.decks)
+    const decks = useSelector(state => state.decks)
+    const deck = decks.find(d => d.id === +id) || undefined
+ 
     useEffect(() => {
-        if (!deck.cards) {
+        if (deck && !deck.cards) {
             dispatch(getFlashCards(id))
         }
 
-    }, [id])
+    }, [id, deck])
 
-    return (
-        <>
-            <h1>Hello From Deck Preview id:{id}</h1>
-        </>
-    )
+    try {
+        return (
+            <>
+                <h1>Hello From Deck Preview id:{id}</h1>
+                {deck && deck.cards.map(card => (
+                    <FlashCardPreview key ={card.id} card={card}/>
+                ))}
+            </>
+        )
+    } catch (e){
+        return <p>Loading...</p>
+    }
+
 }
 
 export default DeckPreview
