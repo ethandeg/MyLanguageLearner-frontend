@@ -20,9 +20,14 @@ const DeckPreview = () => {
         return (
             <>
                 <h1>Hello From Deck Preview id:{id}</h1>
-                {deck && deck.cards.map(card => (
-                    <FlashCardPreview key ={card.id} card={card}/>
-                ))}
+                <div className="container mt-6">
+                    <div className="columns is-multiline">
+                        {deck && deck.cards.map(card => (
+                            <FlashCardPreview key ={card.id} card={card}/>
+                        ))}
+                    </div>
+                </div>
+
             </>
         )
     } catch (e){

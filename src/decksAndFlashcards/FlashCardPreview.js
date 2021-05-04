@@ -1,10 +1,12 @@
 const FlashCardPreview = ({card}) => {
     return (
-        <ul>
-            <li>{card.id}</li>
-            <li>{card.front_side}</li>
-            <li>{card.back_side}</li>
-        </ul>
+        <div className="column">
+        <div className="card py-6">
+            <div className="card-content has-text-centered">
+                {card.front_side}
+            </div>
+        </div>
+        </div>
     )
 }
 
