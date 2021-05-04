@@ -8,6 +8,7 @@ import Routes from "./Routes"
 import jwt from "jsonwebtoken"
 
 function App() {
+
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);
@@ -17,16 +18,16 @@ function App() {
   //loading - get username from token, send to api for to get full user info
   //maybe have userData require a username, which it will get from decoding token
 
-// ideal flow : user visits page => finds token in store => decodes token => gets userInfo from api => saves userInfo w/ token in redux, saves token to API.token
-//              user visits page => does not find token, loads languages from api, but no user info, loadingComplete=true
+  // ideal flow : user visits page => finds token in store => decodes token => gets userInfo from api => saves userInfo w/ token in redux, saves token to API.token
+  //              user visits page => does not find token, loads languages from api, but no user info, loadingComplete=true
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
     const token = findLocalStorage('token')
 
     dispatch(loadLanguages())
-    if(token){
-      const {username} = jwt.decode(token)
+    if (token) {
+      const { username } = jwt.decode(token)
       dispatch(loadUserData(username))
       dispatch(loadUserToken(token))
     }
@@ -43,11 +44,11 @@ function App() {
       dispatch(loadUserData(userData.username))
       dispatch(loadUserToken(res.data._token))
       return res
-    } catch(e){
+    } catch (e) {
       console.error('err')
     }
 
-    
+
   }
 
   const register = async (userData) => {
@@ -56,7 +57,7 @@ function App() {
       dispatch(loadUserData(userData.username))
       dispatch(loadUserToken(res.data._token))
       return res
-    } catch(e){
+    } catch (e) {
       console.error('err')
     }
   }
@@ -65,6 +66,7 @@ function App() {
     localStorage.removeItem('token')
     //empty user info from redux
     dispatch(removeUserInfo())
+    API.token = null
   }
 
   if (!isLoaded) {
@@ -72,8 +74,8 @@ function App() {
   }
   return (
     <>
-      <Nav logout={logout}/>
-      <Routes login={login} register={register}/>
+      <Nav logout={logout} />
+      <Routes login={login} register={register} />
     </>
   );
 }

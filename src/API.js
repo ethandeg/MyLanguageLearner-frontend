@@ -26,6 +26,16 @@ class API {
         return res
     }
 
+    static async createDeck(username, name) {
+        const res = await axios.post(`${BASE_URL}/flashcards/deck/new`, { username, name })
+        return res
+    }
+
+    static async getDeck(deckId) {
+        const res = await axios.get(`${BASE_URL}/flashcards/deck/${deckId}`)
+        return res
+    }
+
 }
 
 
