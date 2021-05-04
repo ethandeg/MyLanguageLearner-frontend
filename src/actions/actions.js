@@ -1,4 +1,4 @@
-import { LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "./actionTypes"
+import { ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -100,6 +100,21 @@ function getFlashCardsDispatch(payload, deckId) {
     return {
         type: LOAD_FLASH_CARDS,
         payload,
+        deckId
+    }
+}
+
+export function addFlashCard(deckId, frontSide, backSide){
+    return async function(dispatch){
+        const {data} = await API.createFlashCard(deckId, frontSide, backSide)
+        dispatch(addFlashCardDispatch(data.deck_id, data.front_side, data.back_side))
+    }
+}
+
+function addFlashCardDispatch(deckId, frontSide, backSide){
+    return {
+        type: ADD_FLASH_CARD,
+        payload: {frontSide, backSide},
         deckId
     }
 }

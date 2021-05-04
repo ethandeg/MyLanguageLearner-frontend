@@ -36,6 +36,11 @@ class API {
         return res
     }
 
+    static async createFlashCard(deckId, frontSide, backSide){
+        const res = await axios.post(`${BASE_URL}/flashcards`, {deckId, frontSide, backSide})
+        return res
+    }
+
 }
 
 
