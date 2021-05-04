@@ -1,11 +1,11 @@
 import {useState} from "react"
 const FlashCard = ({card}) => {
-    const [side, setSide] = useState(card.front_side)
+    const [side, setSide] = useState(card.frontSide)
     const flipCard = () => {
-        if(side === card.front_side){
-            setSide(card.back_side)
+        if(side === card.frontSide){
+            setSide(card.backSide)
         } else {
-            setSide(card.front_side)
+            setSide(card.frontSide)
         }
     }
     return (

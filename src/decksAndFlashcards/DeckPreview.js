@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { getFlashCards } from "../actions/actions"
 import { useEffect } from "react"
@@ -26,9 +26,11 @@ const DeckPreview = () => {
     try {
         return (
             <>
-                <h1>Hello From Deck Preview id:{id}</h1>
+
                 <div className="container mt-6">
-                    <div className="columns is-multiline">
+                <h1 className="title is-3 has-text-primary">{deck.name}</h1>
+                    <Link className="button is-primary is-outlined" to={`/decks/${deck.id}/learn`}>Start Learning!</Link>
+                    <div className="columns is-multiline mt-6">
                         {deck && deck.cards.map(card => (
                             <FlashCardPreview key ={card.id} card={card}/>
                         ))}

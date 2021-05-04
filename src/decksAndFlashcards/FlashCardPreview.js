@@ -3,7 +3,7 @@ const FlashCardPreview = ({card}) => {
         <div className="column">
         <div className="card py-6">
             <div className="card-content has-text-centered">
-                {card.front_side}
+                {card.frontSide}
             </div>
         </div>
         </div>

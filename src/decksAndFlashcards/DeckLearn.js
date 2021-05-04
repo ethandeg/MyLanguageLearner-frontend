@@ -6,7 +6,7 @@
 //how to make carosel - https://www.w3schools.com/howto/howto_js_slideshow.asp
 import {useParams} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import {getFlashCards} from "../actions/actions"
 import FlashCard from "./FlashCard"
 const DeckLearn = () => {
@@ -14,6 +14,13 @@ const DeckLearn = () => {
     const dispatch = useDispatch()
     const decks = useSelector(state => state.decks)
     const deck = decks.find(d => d.id === +deckId) || undefined
+    const [cardNumber, setCardNumber] = useState(0)
+    const changeCard = () => {
+        setCardNumber(cardNumber + 1)
+    }
+    const startOver = () => {
+        setCardNumber(0)
+    }
     useEffect(() => {
         if (deck && !deck.cards) {
             dispatch(getFlashCards(deckId))
@@ -24,12 +31,24 @@ const DeckLearn = () => {
 
     try {
         return (
-            <div className="container mt-6">
-                <div className="columns is-multiline">
-                    {deck && deck.cards.map(card => (
-                        <FlashCard key={card.id} card={card}/>
-                    ))}
-                </div>
+            <div className="container mt-6 p-6">
+                    {deck && deck.cards[cardNumber] ?
+                    <>
+                    <FlashCard key={deck.cards[cardNumber].id} card={deck.cards[cardNumber]}/>
+                    <button className="button is-primary is-pulled-right mr-2" onClick={changeCard}>Next</button>
+                    <button className="button is-info is-pulled-left ml-2" onClick={startOver}>Start Over</button>
+                    </>                  
+                    :
+                    <div className="container">
+                        <div className="columns is-centered">
+
+                            <h2 className="title has-text-info is-3">You Have Finished Studying!</h2>
+                            <button className="button is-info is-pulled-left ml-2" onClick={startOver}>Start Over</button>
+                                
+                        </div>                    
+                    </div>
+                    }
+
             </div>
         )
     } catch (e){
@@ -42,32 +61,5 @@ const DeckLearn = () => {
 export default DeckLearn
 
 
-// const dispatch = useDispatch()
-// const { id } = useParams()
-// const decks = useSelector(state => state.decks)
-// const deck = decks.find(d => d.id === +id) || undefined
 
-// useEffect(() => {
-//     if (deck && !deck.cards) {
-//         dispatch(getFlashCards(id))
-//     }
 
-// }, [id, deck])
-
-// try {
-//     return (
-//         <>
-//             <h1>Hello From Deck Preview id:{id}</h1>
-//             <div className="container mt-6">
-//                 <div className="columns is-multiline">
-//                     {deck && deck.cards.map(card => (
-//                         <FlashCardPreview key ={card.id} card={card}/>
-//                     ))}
-//                 </div>
-//             </div>
-
-//         </>
-//     )
-// } catch (e){
-//     return <p>Loading...</p>
-// }

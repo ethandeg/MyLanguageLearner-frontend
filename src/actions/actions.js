@@ -105,16 +105,17 @@ function getFlashCardsDispatch(payload, deckId) {
 }
 
 export function addFlashCard(deckId, frontSide, backSide){
+    console.log(deckId, frontSide, backSide)
     return async function(dispatch){
         const {data} = await API.createFlashCard(deckId, frontSide, backSide)
-        dispatch(addFlashCardDispatch(data.deck_id, data.front_side, data.back_side))
+        dispatch(addFlashCardDispatch(data.deckId,data.id, data.frontSide, data.backSide))
     }
 }
 
-function addFlashCardDispatch(deckId, frontSide, backSide){
+function addFlashCardDispatch(deckId, id, frontSide, backSide){
     return {
         type: ADD_FLASH_CARD,
-        payload: {frontSide, backSide},
+        payload: {id, frontSide, backSide},
         deckId
     }
 }

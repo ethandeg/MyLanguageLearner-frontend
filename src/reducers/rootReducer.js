@@ -50,6 +50,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         case ADD_FLASH_CARD:
             //map through decks till find the right deckId
             //[...that deck cards, new card]
+            console.log(action)
             return {...state, decks: state.decks.map(deck => {
                 if(deck.id === +action.deckId){
                     return {...deck, cards: [...deck.cards, action.payload]}
