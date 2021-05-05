@@ -41,6 +41,25 @@ class API {
         return res
     }
 
+    static async startLearning(username, languageCode){
+        const res = await axios.post(`${BASE_URL}/user/language/new`, {username, languageCode})
+        return res
+    }
+
+    static async quitLearning(username, languageCode) {
+        console.log(username, languageCode)
+        const res = await axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/user/language/remove`,
+            headers: { 'Content-type': 'application/json' },
+            data:
+                { 'username': username, 'languageCode': languageCode }
+        })
+
+        return res
+
+    }
+
 }
 
 

@@ -1,4 +1,4 @@
-import { ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
+import { QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
 const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [] }
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -48,9 +48,7 @@ function rootReducer(state = INITIAL_STATE, action) {
             }
         
         case ADD_FLASH_CARD:
-            //map through decks till find the right deckId
-            //[...that deck cards, new card]
-            console.log(action)
+
             return {...state, decks: state.decks.map(deck => {
                 if(deck.id === +action.deckId){
                     return {...deck, cards: [...deck.cards, action.payload]}
@@ -58,6 +56,13 @@ function rootReducer(state = INITIAL_STATE, action) {
                     return deck
                 }
             })}
+        
+        case START_LEARNING:
+            return {...state, userLanguages: [...state.userLanguages, action.payload]}
+
+        case QUIT_LEARNING:
+
+            return {...state, userLanguages: state.userLanguages.filter(lang => lang.languageCode !== action.payload)}
 
         default:
             return state

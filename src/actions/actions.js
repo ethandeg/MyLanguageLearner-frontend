@@ -1,4 +1,4 @@
-import { ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "./actionTypes"
+import { QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -105,7 +105,6 @@ function getFlashCardsDispatch(payload, deckId) {
 }
 
 export function addFlashCard(deckId, frontSide, backSide){
-    console.log(deckId, frontSide, backSide)
     return async function(dispatch){
         const {data} = await API.createFlashCard(deckId, frontSide, backSide)
         dispatch(addFlashCardDispatch(data.deckId,data.id, data.frontSide, data.backSide))
@@ -117,5 +116,33 @@ function addFlashCardDispatch(deckId, id, frontSide, backSide){
         type: ADD_FLASH_CARD,
         payload: {id, frontSide, backSide},
         deckId
+    }
+}
+
+export function startLearning(username, languageCode){
+    return async function(dispatch){
+        const {data} = await API.startLearning(username, languageCode)
+        dispatch(startLearningDispatch(data.username, data.languageCode))
+    }
+}
+
+function startLearningDispatch(username, languageCode){
+    return {
+        type: START_LEARNING,
+        payload: {username, languageCode}
+    }
+}
+
+export function quitLearning(username, languageCode){
+    return async function(dispatch) {
+        const res = await API.quitLearning(username, languageCode)
+        dispatch(quitLearningDispatch(languageCode))
+    }
+}
+
+function quitLearningDispatch(payload){
+    return {
+        type: QUIT_LEARNING,
+        payload
     }
 }

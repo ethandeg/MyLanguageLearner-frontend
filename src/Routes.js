@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom"
-import LanguageList from "./LanguageList"
+import LanguageList from "./languageComponents/LanguageList"
 import Decks from "./decksAndFlashcards/Decks"
 import AuthForm from "./authForms/AuthForm"
 import Home from "./Home"
