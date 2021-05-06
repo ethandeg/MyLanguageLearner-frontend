@@ -20,7 +20,7 @@ const Learn = () => {
         }
 
   
-    }, [dispatch, user])
+    }, [dispatch, user, languageCode])
     return (
         <>
         <h1 className="title is-2 has-text-primary">{languageCode}</h1>

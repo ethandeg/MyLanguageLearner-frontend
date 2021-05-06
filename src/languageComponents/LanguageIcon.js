@@ -1,5 +1,6 @@
 import {useDispatch, useSelector} from "react-redux"
 import {startLearning, quitLearning} from "../actions/actions"
+import {Link} from "react-router-dom"
 const LanguageIcon = ({ language, learning }) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userInfo)
@@ -23,7 +24,10 @@ const LanguageIcon = ({ language, learning }) => {
                     </p>
                     {learning 
                     ?
-                    <button className="button is-danger is-light" onClick={removeLanguage}>-</button> 
+                    <>
+                    <Link className="button is-info is-light" to ={`/learn/${language.code}`}>Go</Link>
+                    <button className="button is-danger is-light" onClick={removeLanguage}>-</button>
+                    </> 
                     :
                     <button className="button is-success is-light mb-0" onClick={addLanguage}>+</button>
                      }
