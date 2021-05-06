@@ -47,7 +47,6 @@ class API {
     }
 
     static async quitLearning(username, languageCode) {
-        console.log(username, languageCode)
         const res = await axios({
             method: 'DELETE',
             url: `${BASE_URL}/user/language/remove`,
@@ -58,6 +57,16 @@ class API {
 
         return res
 
+    }
+
+    static async getUnits(){
+        const res = await axios.get(`${BASE_URL}/lesson/units`)
+        return res
+    }
+
+    static async getCompletedLessons(username, languageCode){
+        const res = await axios.get(`${BASE_URL}/lesson/units/lessons/completed?username=${username}&languageCode=${languageCode}`)
+        return res
     }
 
 }

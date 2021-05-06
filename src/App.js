@@ -1,4 +1,6 @@
 import logo from './logo.svg';
+import 'bulma/css/bulma.css'
+
 import Nav from "./Nav"
 import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
@@ -24,7 +26,6 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     const token = findLocalStorage('token')
-
     dispatch(loadLanguages())
     if (token) {
       const { username } = jwt.decode(token)
@@ -34,7 +35,6 @@ function App() {
 
     setIsLoaded(true)
   }, [dispatch])
-
 
 
   const login = async (userData) => {
