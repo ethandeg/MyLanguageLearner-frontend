@@ -1,5 +1,5 @@
-import { LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
-const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [] }
+import { LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
+const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: [] }
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case ADD_ALL_LANGUAGES:
@@ -67,6 +67,16 @@ function rootReducer(state = INITIAL_STATE, action) {
                     return lang
                 })
             }
+
+        case LOAD_SUBUNIT_DATA:
+            //initial api request has langCode and subUnit number
+            //userLessons is the response from the api
+            //will need langCode
+            //userLessons state => 
+            //{langCode:
+                // subunitNumber:
+                // material : [{seg, trans}]}
+            return {...state, lessons: [...state.lessons, {languageCode: action.languageCode, subUnit: action.subUnit, material: action.payload}]}
 
         default:
             return state

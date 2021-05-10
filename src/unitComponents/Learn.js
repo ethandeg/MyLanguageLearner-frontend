@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getUnits } from "../actions/actions"
 import { useParams } from "react-router-dom"
-import Unit from "./Unit"
+import Units from "./Units"
 import { loadCompletedLessons } from "../actions/actions"
 const Learn = () => {
     const { languageCode } = useParams()
@@ -25,7 +25,7 @@ const Learn = () => {
         <div className="container">
             <h1 className="title is-2 has-text-primary">{languageCode}</h1>
             {units && units.map(unit => (
-                <Unit unit={unit} key={unit.id} />
+                <Units unit={unit} key={unit.id} languageCode={languageCode}/>
             ))}
         </div>
     )

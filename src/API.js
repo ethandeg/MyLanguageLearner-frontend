@@ -69,6 +69,11 @@ class API {
         return res
     }
 
+    static async getLessonMaterials(languageCode, subUnit){
+        const res = await axios.get(`${BASE_URL}/lesson/translate?languageCode=${languageCode}&subUnit=${subUnit}`)
+        return res
+    }
+
 }
 
 

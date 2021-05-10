@@ -1,4 +1,4 @@
-import { LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS } from "./actionTypes"
+import { LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -174,5 +174,21 @@ function loadCompletedLessonsDispatch(payload){
         type: LOAD_COMPLETED_LESSONS,
         languageCode,
         lessonId
+    }
+}
+
+export function loadLessonMaterial(languageCode, subUnit){
+    return async function(dispatch){
+        const {data} = await API.getLessonMaterials(languageCode, subUnit)
+        dispatch(loadLessonMaterialDispatch(data, languageCode, subUnit))
+    }
+}
+
+function loadLessonMaterialDispatch(payload, languageCode, subUnit){
+    return {
+        type: LOAD_SUBUNIT_DATA,
+        languageCode,
+        subUnit,
+        payload
     }
 }
