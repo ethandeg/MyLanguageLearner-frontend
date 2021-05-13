@@ -13,7 +13,6 @@ const Lesson = ({subUnit}) => {
 
     //have first lesson be simply going through all of the flash cards
     const changeRotation = () => {
-        console.log(rotation)
         if(rotation < 3){
             setRotation(rotation + 1)
             setCurrentCard(0)
@@ -25,8 +24,6 @@ const Lesson = ({subUnit}) => {
 
     const nextCard = () => {
         setCurrentCard(currentCard + 1)
-        console.log(currentCard)
-        console.log(subUnit.material[currentCard])
     }
     if(rotation === 1 ) return (
         <div>
@@ -35,7 +32,7 @@ const Lesson = ({subUnit}) => {
             <FlashCard key={i} card={{frontSide: mat.segment, backSide: mat.translation[0]}} />
         ))} */}
         {subUnit && 
-            <FlashCard card={{frontSide: subUnit.material[currentCard].segment, backSide: subUnit.material[currentCard].translation[0]}}/>
+            <FlashCard key={currentCard} card={{frontSide: subUnit.material[currentCard].segment, backSide: subUnit.material[currentCard].translation[0]}}/>
         }
                 <button onClick={changeRotation} className="button is-primary">Next Rotation</button>
                 <button onClick={nextCard} className="button is-info">Next Card</button>
@@ -47,7 +44,7 @@ const Lesson = ({subUnit}) => {
         <div>
 
         {subUnit && 
-            <FlashCard card={{backSide: subUnit.material[currentCard].segment, frontSide: subUnit.material[currentCard].translation[0]}}/>
+            <FlashCard key={currentCard} card={{backSide: subUnit.material[currentCard].segment, frontSide: subUnit.material[currentCard].translation[0]}}/>
         }
         <button onClick={changeRotation} className="button is-primary">Next Rotation</button>
         <button onClick={nextCard} className="button is-info">Next Card</button>
