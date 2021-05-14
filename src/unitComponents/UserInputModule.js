@@ -5,6 +5,9 @@ const UserInputModule = ({ card, nextCard }) => {
     console.log(card)
     const [answer, setAnswer] = useState(null)
     const [closeIndexes, setCloseIndexes] = useState(false)
+
+
+
     const checkWrongIndexes = (str1, str2) => {
         if (str1.toLowerCase() === str2.toLowerCase()) return []
         const indexes = []
