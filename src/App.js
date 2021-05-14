@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import API from "./API"
 import Routes from "./Routes"
 import jwt from "jsonwebtoken"
+import './App.css';
 
 function App() {
 
