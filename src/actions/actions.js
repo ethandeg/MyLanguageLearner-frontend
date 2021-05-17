@@ -1,4 +1,4 @@
-import {COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE } from "./actionTypes"
+import {COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE, DELETE_DECK, EDIT_DECK } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -221,5 +221,34 @@ function completeLessonDispatch(payload){
         type: COMPLETE_LESSON,
         languageCode,
         lessonId
+    }
+}
+
+export function deleteDeck(id){
+    return async function(dispatch){
+        const {data} = await API.deleteDeck(id)
+        dispatch(deleteDeckDispatch(data))
+    }
+}
+
+function deleteDeckDispatch(payload){
+    return {
+        type: DELETE_DECK,
+        id: payload.id
+    }
+}
+
+export function editDeck(id, name) {
+    return async function(dispatch){
+        const {data} = await API.editDeck(id,name)
+        dispatch(editDeckDispatch(data))
+    }
+}
+
+function editDeckDispatch(payload){
+    return {
+        type: EDIT_DECK,
+        id: payload.id,
+        name: payload.name
     }
 }

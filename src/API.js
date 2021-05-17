@@ -84,6 +84,26 @@ class API {
         return res
     }
 
+    static async deleteDeck(id){
+        const res = await axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/flashcards/deck`,
+            headers: { 'Content-type': 'application/json' },
+            data:
+                { id }
+        })
+
+        return res
+
+    }
+
+    static async editDeck(id, name){
+        console.log(id, name)
+        const res = await axios.patch(`${BASE_URL}/flashcards/deck`, {id, name})
+        console.log(res)
+        return res
+    }
+
 }
 
 

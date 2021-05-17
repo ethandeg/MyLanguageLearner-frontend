@@ -1,4 +1,4 @@
-import {COMPLETE_LESSON ,POST_EXPERIENCE, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
+import {EDIT_DECK,DELETE_DECK, COMPLETE_LESSON ,POST_EXPERIENCE, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
 const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: [] }
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -23,6 +23,14 @@ function rootReducer(state = INITIAL_STATE, action) {
 
         case CREATE_NEW_DECK:
             return { ...state, decks: [...state.decks, action.payload] }
+
+        case EDIT_DECK:
+            return {...state, decks: state.decks.map(deck => {
+                if(+deck.id === +action.id){
+                    return {...deck, name: action.name}
+                }
+                return deck
+            })}
 
         case LOAD_FLASH_CARDS:
 
@@ -87,7 +95,10 @@ function rootReducer(state = INITIAL_STATE, action) {
                     return {...lang, completedLessons: [...lang.completedLessons, action.lessonId]}
                 }
                 return lang
-            })}    
+            })}
+            
+        case DELETE_DECK:
+            return {...state, decks: state.decks.filter(deck => deck.id !== action.id)}
 
         default:
             return state
