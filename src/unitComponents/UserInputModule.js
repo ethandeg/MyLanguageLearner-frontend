@@ -1,10 +1,13 @@
 import GuessForm from "../authForms/GuessForm"
 import { useState } from "react"
 import CloseAnswer from "./CloseAnswer"
-const UserInputModule = ({ card, nextCard }) => {
+import Modal from "../utilityComponents/Modal"
+const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
     console.log(card)
     const [answer, setAnswer] = useState(null)
+    //make answer an object {result: "wrong", guess: "something", answer: "nothing"}
     const [closeIndexes, setCloseIndexes] = useState(false)
+
 
 
 
@@ -31,33 +34,72 @@ const UserInputModule = ({ card, nextCard }) => {
         guess = guess.replace(regex, '')
         const indexes = checkWrongIndexes(guess, answer)
         if (!indexes.length) {
-            setAnswer("Correct")
+            correctAnswer(guess, answer)
             nextCard()
         }
         else if (indexes.length <= 2) {
-            setCloseIndexes({ indexes, guess, answer })
+            setCloseIndexes(indexes)
             //make message component, pass in a message, and classname
             //make modal component => pass in message and classname
-            setAnswer("Close")
+            setAnswer({result:"Close", guess, answer})
         } else {
-            setAnswer(`Wrong - guess : ${guess}, - answer: ${answer}`)
+            setAnswer({result: "Wrong", guess, answer})
+            gotItWrong()
         }
     }
 
-    const correctAnswer = () => {
-        setAnswer("correct")
+    const correctAnswer = (guess=null, answer=null) => {
+        setAnswer({result:"Correct", guess, answer})
+        gotItRight()
         nextCard()
         setCloseIndexes(false)
+    }
+
+    const wrongAnswer = (guess=null, answer=null) => {
+        setAnswer(false)
+        nextCard()
+        setCloseIndexes(false)
+    }
+
+    const handleWrongClick =() => {
+        wrongAnswer()
+        gotItWrong()
     }
     return (
         <>
             {answer &&
                 <div className="notification is-info is-light">
                     <button className="delete"></button>
-                    {answer}
+                    {answer.result}
                 </div>
             }
-            {closeIndexes && <CloseAnswer setCloseIndexes={setCloseIndexes} closeIndexes={closeIndexes} correctAnswer={correctAnswer} />}
+            {closeIndexes && <>
+            <Modal>
+                <span key="title">So Close!</span>
+                <CloseAnswer key ="body" closeIndexes={closeIndexes} realAnswer={answer}/>
+                <div key="footer">
+                    <button onClick={() => handleWrongClick()} className="button is-warning">Not Quite Unfortunately</button>
+                    <button onClick={() => correctAnswer()} className="button is-success">It is Correct</button>
+                </div>
+                
+            </Modal>
+            
+            
+            </>
+            }
+
+            {answer && answer.result === "Wrong" && 
+            <>
+            <Modal>
+                <span key="title">Incorrect!</span>
+                <div key="body">
+                    <p className="has-text-success">Answer: {answer.answer}</p>
+                    <p className="has-text-danger">Guess: {answer.guess}</p>
+                </div>
+                <button key="footer" onClick ={() => wrongAnswer()} className="button is-info">Next</button>
+            </Modal>
+            </>
+            }
             <div className="box has-text-centered p-6" style={{ marginTop: "15%" }}>
                 <h1>{card.segment}</h1>
             </div>

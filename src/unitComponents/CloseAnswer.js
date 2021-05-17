@@ -1,12 +1,14 @@
-const CloseAnswer = ({ setCloseIndexes, closeIndexes, correctAnswer }) => {
+const CloseAnswer = ({ closeIndexes, realAnswer}) => {
     console.log(closeIndexes)
-    const { indexes, guess, answer } = closeIndexes
-
+    // const { indexes, guess, answer } = closeIndexes
+    // const {guess, answer} = realAnswer
+    // console.log(guess, answer)
+    console.log(realAnswer)
     return (
         <>
             <p> Correct Answer:
-                {answer.split('').map((letter, i) => (
-                indexes.includes(i)
+                {realAnswer.answer.split('').map((letter, i) => (
+                closeIndexes.includes(i)
 
                     ?
                     <span className="has-text-success" key={`answer ${i}`}>{letter}</span>
@@ -15,8 +17,8 @@ const CloseAnswer = ({ setCloseIndexes, closeIndexes, correctAnswer }) => {
             ))}
             </p>
             <p> Your Guess:
-                {guess.split('').map((letter, i) => (
-                indexes.includes(i)
+                {realAnswer.guess.split('').map((letter, i) => (
+                closeIndexes.includes(i)
 
                     ?
                     <span className="has-text-danger" key={`guess ${i}`}>{letter}</span>
@@ -25,8 +27,6 @@ const CloseAnswer = ({ setCloseIndexes, closeIndexes, correctAnswer }) => {
             ))}
             </p>
             {/* change this button to handle a not correct answer */}
-            <button onClick={() => correctAnswer()} className="button is-warning">Not Quite Unfortunately</button>
-            <button onClick={() => correctAnswer()} className="button is-success">It is Correct</button>
         </>
     )
 

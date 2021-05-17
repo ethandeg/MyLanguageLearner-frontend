@@ -5,7 +5,7 @@ const Lesson = ({ subUnit }) => {
     const [rotation, setRotation] = useState(1)
     const [currentCard, setCurrentCard] = useState(0)
     const currFlashCard = subUnit.material[currentCard]
-
+    const [rightAnswers, setRightAnswers] = useState({questions:0, correct:0})
     //have 3 rotations in state
     //first rotation cycle through words
     //second, cycle thorugh with foreign word in front
@@ -16,6 +16,7 @@ const Lesson = ({ subUnit }) => {
     //have first lesson be simply going through all of the flash cards
     const resetCards = () => {
         setCurrentCard(0)
+        setRightAnswers({questions: 0, correct:0})
     }
     const changeRotation = () => {
         if (rotation < 3) {
@@ -30,6 +31,17 @@ const Lesson = ({ subUnit }) => {
     const nextCard = () => {
         setCurrentCard(currentCard + 1)
     }
+
+    const gotItRight = () => {
+        const {questions, correct} = rightAnswers
+        setRightAnswers({questions: questions + 1, correct: correct + 1})
+    }
+
+    const gotItWrong = () => {
+        const {questions, correct} = rightAnswers
+        setRightAnswers({questions: questions +1, correct})
+    }
+
     if (rotation === 1) return (
         <div>
 
@@ -79,13 +91,15 @@ const Lesson = ({ subUnit }) => {
             {subUnit && currFlashCard
                 ?
                 <>
-                    <UserInputModule card={currFlashCard} nextCard={nextCard} />
+                    <UserInputModule card={currFlashCard} nextCard={nextCard} gotItRight={gotItRight} gotItWrong={gotItWrong}/>
                     <button onClick={changeRotation} className="button is-primary">Next Rotation</button>
                 </>
                 :
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! You completed the subunit!</h2>
                     <button onClick={resetCards} className="button is-info">Try again first!</button>
+                    <p>Questions: {rightAnswers.questions}</p>
+                    <p>Correct Answers: {rightAnswers.correct}</p>
                 </>
             }
 
