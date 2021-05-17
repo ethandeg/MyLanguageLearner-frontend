@@ -1,4 +1,4 @@
-import { LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS } from "./actionTypes"
+import {COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -190,5 +190,36 @@ function loadLessonMaterialDispatch(payload, languageCode, subUnit){
         languageCode,
         subUnit,
         payload
+    }
+
+}
+
+export function postExperience(username, experience){
+    return async function(dispatch){
+        const {data} = await API.postExperience(username, experience)
+        dispatch(postExperienceDispatch(data.experience))
+    }
+}
+
+function postExperienceDispatch(payload){
+    return {
+        type: POST_EXPERIENCE,
+        payload
+    }
+}
+
+export function finishLesson(username, languageCode, lessonId){
+    return async function(dispatch){
+        const {data} = await API.completeLesson(username, languageCode, lessonId)
+        dispatch(completeLessonDispatch(data))
+    }
+}
+
+function completeLessonDispatch(payload){
+    const {languageCode, lessonId} = payload
+    return {
+        type: COMPLETE_LESSON,
+        languageCode,
+        lessonId
     }
 }

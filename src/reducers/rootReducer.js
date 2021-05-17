@@ -1,4 +1,4 @@
-import { LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
+import {COMPLETE_LESSON ,POST_EXPERIENCE, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
 const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: [] }
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -77,6 +77,17 @@ function rootReducer(state = INITIAL_STATE, action) {
                 // subunitNumber:
                 // material : [{seg, trans}]}
             return {...state, lessons: [...state.lessons, {languageCode: action.languageCode, subUnit: action.subUnit, material: action.payload}]}
+        
+        case POST_EXPERIENCE:
+            return {...state, userInfo: {...state.userInfo, experience: action.payload}}    
+        
+        case COMPLETE_LESSON:
+            return {...state, userLanguages: state.userLanguages.map(lang => {
+                if(lang.languageCode === action.languageCode){
+                    return {...lang, completedLessons: [...lang.completedLessons, action.lessonId]}
+                }
+                return lang
+            })}    
 
         default:
             return state

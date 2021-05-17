@@ -1,7 +1,14 @@
 import FlashCard from "../decksAndFlashcards/FlashCard"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import UserInputModule from "./UserInputModule"
+import {useDispatch, useSelector} from "react-redux"
+import {postExperience, finishLesson} from "../actions/actions"
+import {useParams, useHistory} from "react-router-dom"
 const Lesson = ({ subUnit }) => {
+    const {languageCode} = useParams()
+    const history = useHistory()
+    const username = useSelector(state => state.userInfo.username)
+    const dispatch = useDispatch()
     const [rotation, setRotation] = useState(1)
     const [currentCard, setCurrentCard] = useState(0)
     const currFlashCard = subUnit.material[currentCard]
@@ -14,6 +21,11 @@ const Lesson = ({ subUnit }) => {
     //=> show word, have them type, check all the translations, if wrong, compare what is wrong with first translation
 
     //have first lesson be simply going through all of the flash cards
+    // useEffect(() => {
+    //     if(finished){
+    //         completeLesson()
+    //     }
+    // }, [finished])
     const resetCards = () => {
         setCurrentCard(0)
         setRightAnswers({questions: 0, correct:0})
@@ -42,12 +54,20 @@ const Lesson = ({ subUnit }) => {
         setRightAnswers({questions: questions +1, correct})
     }
 
+    const completeLesson = () => {
+        const {questions, correct} = rightAnswers;
+        dispatch(postExperience(username, correct))
+        console.log(correct/questions * 100)
+        if(correct/questions * 100 > 80){
+            dispatch(finishLesson(username, languageCode, +subUnit.subUnit))
+        }
+        history.push(`/learn/${languageCode}`)
+    }
+
     if (rotation === 1) return (
         <div>
 
-            {/* {subUnit && subUnit.material.map((mat, i) => (
-            <FlashCard key={i} card={{frontSide: mat.segment, backSide: mat.translation[0]}} />
-        ))} */}
+
             {subUnit && currFlashCard
                 ?
                 <>
@@ -58,6 +78,7 @@ const Lesson = ({ subUnit }) => {
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! Ready to bump up the difficulty?</h2>
                     <button onClick={resetCards} className="button is-info">Try again first!</button>
+                    
                     <button onClick={changeRotation} className="button is-primary">Let's move on!</button>
                 </>
             }
@@ -97,7 +118,9 @@ const Lesson = ({ subUnit }) => {
                 :
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! You completed the subunit!</h2>
-                    <button onClick={resetCards} className="button is-info">Try again first!</button>
+
+                    <button onClick={completeLesson} className="button is-success is-outlined">Claim EXP</button>
+
                     <p>Questions: {rightAnswers.questions}</p>
                     <p>Correct Answers: {rightAnswers.correct}</p>
                 </>

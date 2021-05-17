@@ -74,6 +74,16 @@ class API {
         return res
     }
 
+    static async postExperience(username, experience){
+        const res = await axios.post(`${BASE_URL}/user/experience`, {username, experience})
+        return res
+    }
+
+    static async completeLesson(username, languageCode, lessonId){
+        const res = await axios.post(`${BASE_URL}/lesson/complete`, {username, languageCode, lessonId})
+        return res
+    }
+
 }
 
 
