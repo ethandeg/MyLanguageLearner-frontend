@@ -1,4 +1,4 @@
-import {EDIT_DECK,DELETE_DECK, COMPLETE_LESSON ,POST_EXPERIENCE, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
+import {EDIT_FLASH_CARD,DELETE_FLASH_CARD,EDIT_DECK,DELETE_DECK, COMPLETE_LESSON ,POST_EXPERIENCE, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, LOAD_UNITS, QUIT_LEARNING, START_LEARNING, ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS } from "../actions/actionTypes"
 const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: [] }
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
@@ -99,6 +99,29 @@ function rootReducer(state = INITIAL_STATE, action) {
             
         case DELETE_DECK:
             return {...state, decks: state.decks.filter(deck => deck.id !== action.id)}
+
+        case DELETE_FLASH_CARD:
+            return {...state, decks: state.decks.map(deck => {
+                if(+deck.id === +action.deckId){
+                    return {...deck, cards: deck.cards.filter(card => +card.id !== action.id)}
+                }
+                return deck
+            })}
+
+        case EDIT_FLASH_CARD:
+            return {...state, decks: state.decks.map(deck => {
+                if(+deck.id === +action.deckId){
+                    return {...deck, cards: deck.cards.map(card => {
+                        if(+card.id === +action.id){
+                            const {frontSide, backSide} = action.payload
+                            return {...card, frontSide, backSide}
+                        }
+                        return card
+                    })}
+                }
+
+                return deck
+            })}
 
         default:
             return state

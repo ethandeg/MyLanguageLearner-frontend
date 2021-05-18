@@ -1,4 +1,4 @@
-import {COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE, DELETE_DECK, EDIT_DECK } from "./actionTypes"
+import {EDIT_FLASH_CARD, COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE, DELETE_DECK, EDIT_DECK, DELETE_FLASH_CARD } from "./actionTypes"
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -107,14 +107,14 @@ function getFlashCardsDispatch(payload, deckId) {
 export function addFlashCard(deckId, frontSide, backSide){
     return async function(dispatch){
         const {data} = await API.createFlashCard(deckId, frontSide, backSide)
-        dispatch(addFlashCardDispatch(data.deckId,data.id, data.frontSide, data.backSide))
+        dispatch(addFlashCardDispatch(data.deckId,data.id, data.frontSide, data.backSide, data.deckId))
     }
 }
 
 function addFlashCardDispatch(deckId, id, frontSide, backSide){
     return {
         type: ADD_FLASH_CARD,
-        payload: {id, frontSide, backSide},
+        payload: {id, frontSide, backSide, deckId},
         deckId
     }
 }
@@ -250,5 +250,38 @@ function editDeckDispatch(payload){
         type: EDIT_DECK,
         id: payload.id,
         name: payload.name
+    }
+}
+
+export function deleteFlashCard(id, deckId){
+    return async function(dispatch){
+        const {data} = await API.deleteFlashCard(id)
+        dispatch(deleteFlashCardDispatch({id: data.id, deckId}))
+    }
+}
+
+function deleteFlashCardDispatch(payload){
+    const {id, deckId} = payload
+    return {
+        type: DELETE_FLASH_CARD,
+        id,
+        deckId
+    }
+}
+
+export function editFlashCard(id, frontSide, backSide, deckId){
+    return async function(dispatch){
+        const {data} = await API.editFlashCard(id, frontSide, backSide)
+        dispatch(editFlashCardDispatch({id, frontSide, backSide, deckId}))
+    }
+}
+
+function editFlashCardDispatch(payload){
+    const {id, deckId, frontSide, backSide} = payload;
+    return {
+        type: EDIT_FLASH_CARD,
+        id,
+        deckId,
+        payload: {frontSide, backSide}
     }
 }

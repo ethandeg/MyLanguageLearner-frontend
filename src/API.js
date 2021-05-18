@@ -98,9 +98,24 @@ class API {
     }
 
     static async editDeck(id, name){
-        console.log(id, name)
         const res = await axios.patch(`${BASE_URL}/flashcards/deck`, {id, name})
-        console.log(res)
+        return res
+    }
+
+    static async deleteFlashCard(id){
+        const res = await axios({
+            method: 'DELETE',
+            url: `${BASE_URL}/flashcards`,
+            headers: { 'Content-type': 'application/json' },
+            data:
+                { id }
+        })
+
+        return res
+    }
+
+    static async editFlashCard(id, frontSide, backSide){
+        const res = await axios.patch(`${BASE_URL}/flashcards`, {id, frontSide, backSide})
         return res
     }
 
