@@ -34,9 +34,12 @@ const Nav = ({ logout }) => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 {token ?
+                                <>
                                     <button onClick={handleLogout} className="button is-danger">
                                         <strong>Sign Out</strong>
                                     </button>
+                                    <NavLink className="navbar-item" to="/profile">Profile</NavLink>
+                                    </>
                                     :
 
                                     <>
