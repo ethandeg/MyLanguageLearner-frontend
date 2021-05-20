@@ -117,6 +117,11 @@ export function addFlashCard(deckId, frontSide, backSide) {
     }
 }
 
+export async function addFlashCardNoDispatch(deckId, frontSide, backSide){
+    const {data} = await API.createFlashCard(deckId, frontSide, backSide)
+    return data
+}
+
 function addFlashCardDispatch(deckId, id, frontSide, backSide) {
     return {
         type: ADD_FLASH_CARD,

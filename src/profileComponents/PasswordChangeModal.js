@@ -20,7 +20,7 @@ const PasswordChangeModal = ({ handleCancel, handleSubmit }) => {
     //keys need to be set to => "title", "body", "footer"
     return (
         <Modal>
-            <h2 key="title">ChangePassword</h2>
+            <span key="title">ChangePassword</span>
             <form key="body" className="box" onSubmit={submit}>
                 <div className="field">
                     <label className="label">Old Password:</label>

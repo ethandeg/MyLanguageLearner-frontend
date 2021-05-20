@@ -2,11 +2,19 @@ import GuessForm from "../authForms/GuessForm"
 import { useState } from "react"
 import CloseAnswer from "./CloseAnswer"
 import Modal from "../utilityComponents/Modal"
+import { useSelector, useDispatch } from "react-redux"
+import AddToDeckForm from "../authForms/AddToDeckForm"
+import {addFlashCardNoDispatch} from "../actions/actions"
 const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
     console.log(card)
+    const dispatch = useDispatch()
     const [answer, setAnswer] = useState(null)
+    const [showDecks, setShowDecks] = useState(false)
     //make answer an object {result: "wrong", guess: "something", answer: "nothing"}
     const [closeIndexes, setCloseIndexes] = useState(false)
+    //create logic to turn wrong answer into a flashcard for further studying
+    //populate with user decks to pick which one
+    const decks = useSelector(state => state.decks)
 
 
 
@@ -65,6 +73,26 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
         wrongAnswer()
         gotItWrong()
     }
+
+    const changeDeckView = () => {
+        if(showDecks){
+            setShowDecks(false)
+        } else {
+            setShowDecks(true)
+        }
+    }
+
+    const sendToDeck = async(deckId) => {
+        try {
+            await addFlashCardNoDispatch(deckId,card.translation[0],card.segment)
+            wrongAnswer()
+        } catch(e){
+            console.log(e)
+        }
+        
+    }
+
+
     return (
         <>
             {answer &&
@@ -75,8 +103,19 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
             }
             {closeIndexes && <>
             <Modal>
-                <span key="title">So Close!</span>
+                <span key="title">So Close!</span>   
+                {showDecks
+                
+                ?
+                <div key="body">
+                <AddToDeckForm decks={decks} submit={sendToDeck} cancel={changeDeckView}/>
+
+            </div>
+                :
                 <CloseAnswer key ="body" closeIndexes={closeIndexes} realAnswer={answer}/>
+                }           
+               
+                
                 <div key="footer">
                     <button onClick={() => handleWrongClick()} className="button is-warning">Not Quite Unfortunately</button>
                     <button onClick={() => correctAnswer()} className="button is-success">It is Correct</button>
@@ -92,11 +131,29 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
             <>
             <Modal>
                 <span key="title">Incorrect!</span>
+                {showDecks
+                
+                ?
+                <div key="body">
+                <AddToDeckForm decks={decks} submit={sendToDeck} cancel={changeDeckView}/>
+
+            </div>
+                :
                 <div key="body">
                     <p className="has-text-success">Answer: {answer.answer}</p>
                     <p className="has-text-danger">Guess: {answer.guess}</p>
-                </div>
-                <button key="footer" onClick ={() => wrongAnswer()} className="button is-info">Next</button>
+                </div>                
+                }
+                {!showDecks &&
+                
+                <div key="footer">
+                <button className="button is-info is-outlined" onClick={changeDeckView}>Create Flashcard</button>
+                <button onClick ={() => wrongAnswer()} className="button is-info">Next</button>
+                </div>               
+                }
+
+
+                
             </Modal>
             </>
             }

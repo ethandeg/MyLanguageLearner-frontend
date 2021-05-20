@@ -56,7 +56,9 @@ function rootReducer(state = INITIAL_STATE, action) {
             return {
                 ...state, decks: state.decks.map(deck => {
                     if (deck.id === +action.deckId) {
-                        return { ...deck, cards: [...deck.cards, action.payload] }
+                        if(deck.cards) return { ...deck, cards: [...deck.cards, action.payload] }
+                        return {...deck, cards:[action.payload]}
+                        
                     } else {
                         return deck
                     }

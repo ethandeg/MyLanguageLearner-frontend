@@ -92,9 +92,9 @@ const Profile = () => {
                                         <div className="level-left">
                                             {userLanguagesFull.map(lang => (
                                                 <div className="mx-1" key={lang.code}>
-                                                    <i className="level-item">
+                                                    <Link to ={`/learn/${lang.code}`} className="level-item">
                                                         <span className="icon is-medium"><img src={lang.flag} alt={lang.name}></img></span>
-                                                    </i>
+                                                    </Link>
                                                 </div>
                                             ))}
 
