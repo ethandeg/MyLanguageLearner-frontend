@@ -36,13 +36,13 @@ class API {
         return res
     }
 
-    static async createFlashCard(deckId, frontSide, backSide){
-        const res = await axios.post(`${BASE_URL}/flashcards`, {deckId, frontSide, backSide})
+    static async createFlashCard(deckId, frontSide, backSide) {
+        const res = await axios.post(`${BASE_URL}/flashcards`, { deckId, frontSide, backSide })
         return res
     }
 
-    static async startLearning(username, languageCode){
-        const res = await axios.post(`${BASE_URL}/user/language/new`, {username, languageCode})
+    static async startLearning(username, languageCode) {
+        const res = await axios.post(`${BASE_URL}/user/language/new`, { username, languageCode })
         return res
     }
 
@@ -59,32 +59,32 @@ class API {
 
     }
 
-    static async getUnits(){
+    static async getUnits() {
         const res = await axios.get(`${BASE_URL}/lesson/units`)
         return res
     }
 
-    static async getCompletedLessons(username, languageCode){
+    static async getCompletedLessons(username, languageCode) {
         const res = await axios.get(`${BASE_URL}/lesson/units/lessons/completed?username=${username}&languageCode=${languageCode}`)
         return res
     }
 
-    static async getLessonMaterials(languageCode, subUnit){
+    static async getLessonMaterials(languageCode, subUnit) {
         const res = await axios.get(`${BASE_URL}/lesson/translate?languageCode=${languageCode}&subUnit=${subUnit}`)
         return res
     }
 
-    static async postExperience(username, experience){
-        const res = await axios.post(`${BASE_URL}/user/experience`, {username, experience})
+    static async postExperience(username, experience) {
+        const res = await axios.post(`${BASE_URL}/user/experience`, { username, experience })
         return res
     }
 
-    static async completeLesson(username, languageCode, lessonId){
-        const res = await axios.post(`${BASE_URL}/lesson/complete`, {username, languageCode, lessonId})
+    static async completeLesson(username, languageCode, lessonId) {
+        const res = await axios.post(`${BASE_URL}/lesson/complete`, { username, languageCode, lessonId })
         return res
     }
 
-    static async deleteDeck(id){
+    static async deleteDeck(id) {
         const res = await axios({
             method: 'DELETE',
             url: `${BASE_URL}/flashcards/deck`,
@@ -97,12 +97,12 @@ class API {
 
     }
 
-    static async editDeck(id, name){
-        const res = await axios.patch(`${BASE_URL}/flashcards/deck`, {id, name})
+    static async editDeck(id, name) {
+        const res = await axios.patch(`${BASE_URL}/flashcards/deck`, { id, name })
         return res
     }
 
-    static async deleteFlashCard(id){
+    static async deleteFlashCard(id) {
         const res = await axios({
             method: 'DELETE',
             url: `${BASE_URL}/flashcards`,
@@ -114,8 +114,18 @@ class API {
         return res
     }
 
-    static async editFlashCard(id, frontSide, backSide){
-        const res = await axios.patch(`${BASE_URL}/flashcards`, {id, frontSide, backSide})
+    static async editFlashCard(id, frontSide, backSide) {
+        const res = await axios.patch(`${BASE_URL}/flashcards`, { id, frontSide, backSide })
+        return res
+    }
+
+    static async editUser(username, data) {
+        const res = await axios.patch(`${BASE_URL}/user/${username}`, data)
+        return res
+    }
+
+    static async changePassword(data) {
+        const res = await axios.patch(`${BASE_URL}/auth`, data)
         return res
     }
 

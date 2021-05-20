@@ -1,4 +1,10 @@
-import {EDIT_FLASH_CARD, COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING,START_LEARNING, ADD_FLASH_CARD,LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES, LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE, DELETE_DECK, EDIT_DECK, DELETE_FLASH_CARD } from "./actionTypes"
+import {
+    EDIT_FLASH_CARD, COMPLETE_LESSON, LOAD_SUBUNIT_DATA, LOAD_COMPLETED_LESSONS, QUIT_LEARNING, START_LEARNING,
+    ADD_FLASH_CARD, LOAD_USER_TOKEN, REMOVE_USER_INFO, ADD_ALL_LANGUAGES, LOAD_DECKS, LOAD_USER_LANGUAGES,
+    LOAD_USER_INFO, CREATE_NEW_DECK, LOAD_FLASH_CARDS, LOAD_UNITS, POST_EXPERIENCE, DELETE_DECK, EDIT_DECK,
+    DELETE_FLASH_CARD, EDIT_USER
+} from "./actionTypes"
+
 import API from "../API"
 export function loadLanguages() {
     return async function (dispatch) {
@@ -104,72 +110,72 @@ function getFlashCardsDispatch(payload, deckId) {
     }
 }
 
-export function addFlashCard(deckId, frontSide, backSide){
-    return async function(dispatch){
-        const {data} = await API.createFlashCard(deckId, frontSide, backSide)
-        dispatch(addFlashCardDispatch(data.deckId,data.id, data.frontSide, data.backSide, data.deckId))
+export function addFlashCard(deckId, frontSide, backSide) {
+    return async function (dispatch) {
+        const { data } = await API.createFlashCard(deckId, frontSide, backSide)
+        dispatch(addFlashCardDispatch(data.deckId, data.id, data.frontSide, data.backSide, data.deckId))
     }
 }
 
-function addFlashCardDispatch(deckId, id, frontSide, backSide){
+function addFlashCardDispatch(deckId, id, frontSide, backSide) {
     return {
         type: ADD_FLASH_CARD,
-        payload: {id, frontSide, backSide, deckId},
+        payload: { id, frontSide, backSide, deckId },
         deckId
     }
 }
 
-export function startLearning(username, languageCode){
-    return async function(dispatch){
-        const {data} = await API.startLearning(username, languageCode)
+export function startLearning(username, languageCode) {
+    return async function (dispatch) {
+        const { data } = await API.startLearning(username, languageCode)
         dispatch(startLearningDispatch(data.username, data.languageCode))
     }
 }
 
-function startLearningDispatch(username, languageCode){
+function startLearningDispatch(username, languageCode) {
     return {
         type: START_LEARNING,
-        payload: {username, languageCode}
+        payload: { username, languageCode }
     }
 }
 
-export function quitLearning(username, languageCode){
-    return async function(dispatch) {
+export function quitLearning(username, languageCode) {
+    return async function (dispatch) {
         const res = await API.quitLearning(username, languageCode)
         dispatch(quitLearningDispatch(languageCode))
     }
 }
 
-function quitLearningDispatch(payload){
+function quitLearningDispatch(payload) {
     return {
         type: QUIT_LEARNING,
         payload
     }
 }
 
-export function getUnits(){
-    return async function(dispatch){
-        const {data} = await API.getUnits()
+export function getUnits() {
+    return async function (dispatch) {
+        const { data } = await API.getUnits()
         dispatch(getUnitsDispatch(data))
     }
 }
 
-function getUnitsDispatch(payload){
+function getUnitsDispatch(payload) {
     return {
         type: LOAD_UNITS,
         payload
     }
 }
 
-export function loadCompletedLessons(username, languageCode){
-    return async function(dispatch){
-        const {data} = await API.getCompletedLessons(username, languageCode)
+export function loadCompletedLessons(username, languageCode) {
+    return async function (dispatch) {
+        const { data } = await API.getCompletedLessons(username, languageCode)
         dispatch(loadCompletedLessonsDispatch(data))
     }
 }
 
-function loadCompletedLessonsDispatch(payload){
-    const {languageCode, lessonId} = payload
+function loadCompletedLessonsDispatch(payload) {
+    const { languageCode, lessonId } = payload
     return {
         type: LOAD_COMPLETED_LESSONS,
         languageCode,
@@ -177,14 +183,14 @@ function loadCompletedLessonsDispatch(payload){
     }
 }
 
-export function loadLessonMaterial(languageCode, subUnit){
-    return async function(dispatch){
-        const {data} = await API.getLessonMaterials(languageCode, subUnit)
+export function loadLessonMaterial(languageCode, subUnit) {
+    return async function (dispatch) {
+        const { data } = await API.getLessonMaterials(languageCode, subUnit)
         dispatch(loadLessonMaterialDispatch(data, languageCode, subUnit))
     }
 }
 
-function loadLessonMaterialDispatch(payload, languageCode, subUnit){
+function loadLessonMaterialDispatch(payload, languageCode, subUnit) {
     return {
         type: LOAD_SUBUNIT_DATA,
         languageCode,
@@ -194,29 +200,29 @@ function loadLessonMaterialDispatch(payload, languageCode, subUnit){
 
 }
 
-export function postExperience(username, experience){
-    return async function(dispatch){
-        const {data} = await API.postExperience(username, experience)
+export function postExperience(username, experience) {
+    return async function (dispatch) {
+        const { data } = await API.postExperience(username, experience)
         dispatch(postExperienceDispatch(data.experience))
     }
 }
 
-function postExperienceDispatch(payload){
+function postExperienceDispatch(payload) {
     return {
         type: POST_EXPERIENCE,
         payload
     }
 }
 
-export function finishLesson(username, languageCode, lessonId){
-    return async function(dispatch){
-        const {data} = await API.completeLesson(username, languageCode, lessonId)
+export function finishLesson(username, languageCode, lessonId) {
+    return async function (dispatch) {
+        const { data } = await API.completeLesson(username, languageCode, lessonId)
         dispatch(completeLessonDispatch(data))
     }
 }
 
-function completeLessonDispatch(payload){
-    const {languageCode, lessonId} = payload
+function completeLessonDispatch(payload) {
+    const { languageCode, lessonId } = payload
     return {
         type: COMPLETE_LESSON,
         languageCode,
@@ -224,14 +230,14 @@ function completeLessonDispatch(payload){
     }
 }
 
-export function deleteDeck(id){
-    return async function(dispatch){
-        const {data} = await API.deleteDeck(id)
+export function deleteDeck(id) {
+    return async function (dispatch) {
+        const { data } = await API.deleteDeck(id)
         dispatch(deleteDeckDispatch(data))
     }
 }
 
-function deleteDeckDispatch(payload){
+function deleteDeckDispatch(payload) {
     return {
         type: DELETE_DECK,
         id: payload.id
@@ -239,13 +245,13 @@ function deleteDeckDispatch(payload){
 }
 
 export function editDeck(id, name) {
-    return async function(dispatch){
-        const {data} = await API.editDeck(id,name)
+    return async function (dispatch) {
+        const { data } = await API.editDeck(id, name)
         dispatch(editDeckDispatch(data))
     }
 }
 
-function editDeckDispatch(payload){
+function editDeckDispatch(payload) {
     return {
         type: EDIT_DECK,
         id: payload.id,
@@ -253,15 +259,15 @@ function editDeckDispatch(payload){
     }
 }
 
-export function deleteFlashCard(id, deckId){
-    return async function(dispatch){
-        const {data} = await API.deleteFlashCard(id)
-        dispatch(deleteFlashCardDispatch({id: data.id, deckId}))
+export function deleteFlashCard(id, deckId) {
+    return async function (dispatch) {
+        const { data } = await API.deleteFlashCard(id)
+        dispatch(deleteFlashCardDispatch({ id: data.id, deckId }))
     }
 }
 
-function deleteFlashCardDispatch(payload){
-    const {id, deckId} = payload
+function deleteFlashCardDispatch(payload) {
+    const { id, deckId } = payload
     return {
         type: DELETE_FLASH_CARD,
         id,
@@ -269,19 +275,40 @@ function deleteFlashCardDispatch(payload){
     }
 }
 
-export function editFlashCard(id, frontSide, backSide, deckId){
-    return async function(dispatch){
-        const {data} = await API.editFlashCard(id, frontSide, backSide)
-        dispatch(editFlashCardDispatch({id, frontSide, backSide, deckId}))
+export function editFlashCard(id, frontSide, backSide, deckId) {
+    return async function (dispatch) {
+        const { data } = await API.editFlashCard(id, frontSide, backSide)
+        dispatch(editFlashCardDispatch({ id, frontSide, backSide, deckId }))
     }
 }
 
-function editFlashCardDispatch(payload){
-    const {id, deckId, frontSide, backSide} = payload;
+function editFlashCardDispatch(payload) {
+    const { id, deckId, frontSide, backSide } = payload;
     return {
         type: EDIT_FLASH_CARD,
         id,
         deckId,
-        payload: {frontSide, backSide}
+        payload: { frontSide, backSide }
     }
+}
+
+export function editUser(username, d) {
+    return async function (dispatch) {
+        const { data } = await API.editUser(username, d)
+        dispatch(editUserDispatch(data))
+    }
+}
+
+function editUserDispatch(payload) {
+    return {
+        type: EDIT_USER,
+        payload
+    }
+}
+
+export async function updatePass(d) {
+    console.log(d)
+    const { data } = await API.changePassword(d)
+    console.log(data)
+    return data
 }
