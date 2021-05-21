@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import { NavLink, Link, useHistory } from "react-router-dom"
+
 const Nav = ({ logout }) => {
     const history = useHistory()
     const handleLogout = () => {
@@ -34,11 +35,11 @@ const Nav = ({ logout }) => {
                         <div className="navbar-item">
                             <div className="buttons">
                                 {token ?
-                                <>
-                                    <button onClick={handleLogout} className="button is-danger">
-                                        <strong>Sign Out</strong>
-                                    </button>
-                                    <NavLink className="navbar-item" to="/profile">Profile</NavLink>
+                                    <>
+                                        <button onClick={handleLogout} className="button is-danger">
+                                            <strong>Sign Out</strong>
+                                        </button>
+                                        <NavLink className="navbar-item" to="/profile">Profile</NavLink>
                                     </>
                                     :
 

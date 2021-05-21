@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import 'bulma/css/bulma.css'
 
+import 'bulma/css/bulma.css'
+import "bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css"
 import Nav from "./Nav"
 import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
@@ -9,6 +9,7 @@ import API from "./API"
 import Routes from "./Routes"
 import jwt from "jsonwebtoken"
 import './App.css';
+import Footer from "./Footer"
 
 function App() {
 
@@ -76,7 +77,11 @@ function App() {
   return (
     <>
       <Nav logout={logout} />
-      <Routes login={login} register={register} />
+      <div style={{ height: "100vh" }}>
+        <Routes login={login} register={register} />
+      </div>
+      <Footer />
+
     </>
   );
 }
