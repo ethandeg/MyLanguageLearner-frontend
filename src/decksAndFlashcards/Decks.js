@@ -50,6 +50,7 @@ const Decks = () => {
                 </div>
 
             }
+            {/* break off into a seperate component, have flashcards use it too! */}
             <div className="columns mt-6 is-multiline">
                 {decks.length ? decks.map(deck => (
                     <Deck key={deck.id} deck={deck} />

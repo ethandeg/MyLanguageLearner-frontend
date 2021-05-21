@@ -77,10 +77,13 @@ function App() {
   return (
     <>
       <Nav logout={logout} />
-      <div style={{ height: "100vh" }}>
+
         <Routes login={login} register={register} />
-      </div>
-      <Footer />
+        <Footer />
+
+        
+
+     
 
     </>
   );
