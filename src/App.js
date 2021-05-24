@@ -1,6 +1,6 @@
 
 import 'bulma/css/bulma.css'
-import "bulma-extensions/bulma-steps/dist/css/bulma-steps.min.css"
+
 import Nav from "./Nav"
 import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
@@ -12,11 +12,15 @@ import './App.css';
 import Footer from "./Footer"
 
 function App() {
-
+  const TOKEN_STORAGE_ID = 'token'
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);
     return item
+  }
+
+  const removeLocalStorage = key => {
+    localStorage.removeItem(key)
   }
   //if token, the load user data with that token
   //loading - get username from token, send to api for to get full user info
@@ -27,12 +31,19 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
   useEffect(() => {
-    const token = findLocalStorage('token')
+    const token = findLocalStorage(TOKEN_STORAGE_ID)
     dispatch(loadLanguages())
     if (token) {
-      const { username } = jwt.decode(token)
-      dispatch(loadUserData(username))
-      dispatch(loadUserToken(token))
+      try {
+        const { username } = jwt.decode(token)
+        if(username){
+          dispatch(loadUserData(username))
+          dispatch(loadUserToken(token))
+        }
+      } catch(e){
+        removeLocalStorage(TOKEN_STORAGE_ID)
+      }
+
     }
 
     setIsLoaded(true)
@@ -65,7 +76,7 @@ function App() {
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
+    removeLocalStorage(TOKEN_STORAGE_ID)
     //empty user info from redux
     dispatch(removeUserInfo())
     API.token = null
@@ -74,16 +85,13 @@ function App() {
   if (!isLoaded) {
     return <h1>Loading....</h1>
   }
+  // https://stackoverflow.com/questions/43727032/hero-footer-not-at-bottom-of-page
   return (
     <>
       <Nav logout={logout} />
 
         <Routes login={login} register={register} />
-        <Footer />
-
-        
-
-     
+        <Footer/>
 
     </>
   );

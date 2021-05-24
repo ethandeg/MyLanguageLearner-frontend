@@ -1,14 +1,23 @@
 import { useSelector } from "react-redux"
 import { NavLink, Link, useHistory } from "react-router-dom"
+import {useState} from "react"
 
 const Nav = ({ logout }) => {
+    const [active, setActive] = useState(false)
     const history = useHistory()
     const handleLogout = () => {
         logout()
         history.push("/")
     }
     const token = useSelector(store => store.userInfo.token)
-
+    const changeActive = () => {
+        if(active){
+            setActive(false)
+        } else {
+            setActive(true)
+        }
+    }
+    const classNames = active ? "is-active" : undefined;
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="container">
@@ -16,13 +25,13 @@ const Nav = ({ logout }) => {
                     <NavLink className="navbar-item" to="/">
                         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
                     </NavLink>
-                    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" onClick={changeActive} className={`navbar-burger ${classNames}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
                 </div>
-                <div id="navbarBasicExample" className="navbar-menu">
+                <div id="navbarBasicExample" className={`navbar-menu ${classNames}`}>
                     <div className="navbar-start">
                         <NavLink className="navbar-item" to="/languages">
                             Languages
@@ -39,6 +48,7 @@ const Nav = ({ logout }) => {
                                         <button onClick={handleLogout} className="button is-danger">
                                             <strong>Sign Out</strong>
                                         </button>
+
                                         <NavLink className="navbar-item" to="/profile">Profile</NavLink>
                                     </>
                                     :

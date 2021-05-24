@@ -9,7 +9,8 @@ import Learn from "./unitComponents/Learn"
 import SubUnit from "./unitComponents/SubUnit"
 import Profile from "./profileComponents/Profile"
 import ProfileEdit from "./profileComponents/ProfileEdit"
-
+import Secret from "./Secret"
+import PrivateRoute from "./PrivateRoute"
 
 const Routes = ({ login, register, logout }) => {
     return (
@@ -25,6 +26,7 @@ const Routes = ({ login, register, logout }) => {
             <Route exact path="/learn/:languageCode/:subUnit"> <SubUnit /></Route>
             <Route exact path="/register"> <AuthForm submit={register} /></Route>
             <Route exact path="/login"> <AuthForm submit={login} /></Route>
+            <PrivateRoute exact path ="/secret"> <Secret /></PrivateRoute>
         </Switch>
     )
 }

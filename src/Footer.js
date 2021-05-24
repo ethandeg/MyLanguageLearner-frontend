@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 const Footer = () => {
     return (
-        <footer class="footer" >
+        <footer className="footer" >
             <div className="container">
                 <div className="columns">
                     <div className="column is-half">
