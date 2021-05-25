@@ -1,7 +1,12 @@
 import {useState} from "react"
 const RadioForm = ({submit, values, name,primaryKey, label}) => {
     const INITIAL_STATE = {[name]: ''}
+
     const [formData, setFormData] = useState(INITIAL_STATE)
+    console.log(formData)
+    console.log(values[0])
+    console.log(primaryKey)
+    console.log(values[0].languageCode)
     const handleChange = e => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -27,7 +32,7 @@ const RadioForm = ({submit, values, name,primaryKey, label}) => {
                   </label>
                  </div>
             ))}
-            <button onClick={handleSubmit} className="button is-outlined is-info">+</button>
+            <button onClick={handleSubmit} className="button is-outlined is-info is-small">submit</button>
         </form>
     )
 }
