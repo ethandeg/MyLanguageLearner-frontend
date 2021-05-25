@@ -11,6 +11,7 @@ import jwt from "jsonwebtoken"
 import './App.css';
 import Footer from "./Footer"
 import useTimedMessage from "./hooks/useTimedMessage"
+import { Redirect } from 'react-router'
 
 
 
@@ -58,12 +59,13 @@ console.log(setMsgFlag.toString())
   const login = async (userData) => {
     try {
       const res = await API.login(userData)
+      if(res.data.error) throw new Error(res.data.error.message)
       //dispatch from the res, so it doesn't needlessly ping the server?
       dispatch(loadUserData(userData.username))
       dispatch(loadUserToken(res.data._token))
       return res
     } catch (e) {
-      console.error('err')
+      return e
     }
 
 
@@ -76,7 +78,7 @@ console.log(setMsgFlag.toString())
       dispatch(loadUserToken(res.data._token))
       return res
     } catch (e) {
-      console.error('err')
+      return e
     }
   }
 

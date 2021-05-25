@@ -4,6 +4,7 @@ const AuthForm = ({ submit }) => {
     const history = useHistory()
     const INITIAL_STATE = { username: '', password: '' }
     const [formData, setFormData] = useState(INITIAL_STATE)
+    const [errors, setErrors] = useState(null)
     const handleChange = e => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -12,14 +13,19 @@ const AuthForm = ({ submit }) => {
         }))
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         try {
-            const res = submit(formData)
+            const res = await submit(formData)
+            console.log(res)
             setFormData(INITIAL_STATE)
+            if(res.response) {
+                setErrors(res.response.data.error.message)
+                throw new Error(res.response.data.error.message)
+            }
             history.push("/")
         } catch (e) {
-            console.log('err')
+
         }
 
 
@@ -29,6 +35,7 @@ const AuthForm = ({ submit }) => {
         <div className="container">
 
             <form className="box mt-6" onSubmit={handleSubmit}>
+                {errors && <p className="has-text-danger">{errors}</p>}
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">

@@ -20,10 +20,11 @@ class API {
     }
 
     static async login(userData) {
-        const res = await axios.post(`${BASE_URL}/auth/login`, userData)
-        API.token = res.data._token
-        localStorage.setItem('token', API.token)
-        return res
+            const res = await axios.post(`${BASE_URL}/auth/login`, userData)
+            API.token = res.data._token
+            localStorage.setItem('token', API.token)
+            return res
+
     }
 
     static async createDeck(username, name) {
