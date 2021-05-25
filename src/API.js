@@ -129,6 +129,13 @@ class API {
         return res
     }
 
+    static async translateWord(query, lang) {
+        console.log(query, lang)
+        const res = await axios.get(`${BASE_URL}/translate?q=${query}&lang=${lang}`)
+        console.log(res)
+        return res
+    }
+
 }
 
 

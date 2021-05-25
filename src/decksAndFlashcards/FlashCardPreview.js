@@ -36,10 +36,14 @@ const FlashCardPreview = ({card}) => {
     }
 
     return (
-        <div className="column">
-            <i className="far fa-trash-alt has-text-danger" onClick={deleteCard}></i>
-            <i className="far fa-edit has-text-primary" onClick={changeEditMode}></i>
-        <div className="card py-6">
+        <div className="column is-one-quarter">
+
+        <div className="card">
+            <div className="content" style={{float: "right"}}>
+                <i className="far fa-trash-alt has-text-danger" onClick={deleteCard}></i>
+                <i className="far fa-edit has-text-primary mx-2" onClick={changeEditMode}></i>
+            </div>
+
             {editMode 
             
             ?
@@ -49,7 +53,7 @@ const FlashCardPreview = ({card}) => {
                  <button className="button is-info is-outlined">Save</button>
              </form>
             :
-            <div className="card-content has-text-centered">
+            <div className="card-content has-text-centered p-6">
                 {card.frontSide}
             </div>            
             }

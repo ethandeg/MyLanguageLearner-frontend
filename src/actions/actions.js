@@ -312,8 +312,11 @@ function editUserDispatch(payload) {
 }
 
 export async function updatePass(d) {
-    console.log(d)
     const { data } = await API.changePassword(d)
-    console.log(data)
+    return data
+}
+
+export async function translateQuery(query, lang){
+    const {data} = await API.translateWord(query,lang)
     return data
 }

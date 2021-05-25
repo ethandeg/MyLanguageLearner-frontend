@@ -2,25 +2,14 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { createNewDeck } from "../actions/actions"
+import OneInputForm from "../authForms/OneInputForm"
 import Deck from "./Deck"
 const Decks = () => {
     const decks = useSelector(store => store.decks)
     const user = useSelector(store => store.userInfo)
     const dispatch = useDispatch()
-    const INITIAL_STATE = { name: '' }
-    const [formData, setFormData] = useState(INITIAL_STATE)
-    const handleChange = e => {
-        const { name, value } = e.target;
-        setFormData(formData => ({
-            ...formData,
-            [name]: value
-        }))
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        dispatch(createNewDeck(user.username, formData.name))
-        setFormData(INITIAL_STATE)
+    const handleSubmit = (data) => {
+        dispatch(createNewDeck(user.username, data.name))
     }
     return (
         <div className="container mb-6">
@@ -29,22 +18,8 @@ const Decks = () => {
                 <div className="columns">
                     <div className="column"></div>
                     <div className="column is-one-third">
-
-                        <form className="box mt-6" onSubmit={handleSubmit}>
-                            <h3 className="title has-text-centered is-5 has-text-primary">Add a new deck</h3>
-                            <div class="field has-addons is-centered" style={{ marginLeft: "21%" }}>
-                                <div class="control">
-
-                                    <input className="input" type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-                                </div>
-                                <div class="control">
-                                    <button class="button is-info">
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-
-                        </form>
+                        <OneInputForm title="Add a new deck" name="name" submit={handleSubmit}/>
+                        
                     </div>
                     <div className="column"></div>
                 </div>
