@@ -125,7 +125,9 @@ class API {
     }
 
     static async changePassword(data) {
+        console.log("WE ARE CHANGING PASSWORDS")
         const res = await axios.patch(`${BASE_URL}/auth`, data)
+        console.log(res)
         return res
     }
 

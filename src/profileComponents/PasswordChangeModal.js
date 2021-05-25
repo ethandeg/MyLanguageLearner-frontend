@@ -1,7 +1,7 @@
 import Modal from "../utilityComponents/Modal"
 import { useState } from 'react'
 
-const PasswordChangeModal = ({ handleCancel, handleSubmit }) => {
+const PasswordChangeModal = ({ handleCancel, handleSubmit, errors }) => {
     const INITIAL_STATE = { oldPassword: '', newPassword: "", newPasswordVerify: "" }
     const [formData, setFormData] = useState(INITIAL_STATE)
     const handleChange = e => {
@@ -11,6 +11,7 @@ const PasswordChangeModal = ({ handleCancel, handleSubmit }) => {
             [name]: value
         }))
     }
+
 
     const submit = e => {
         e.preventDefault()
@@ -22,22 +23,23 @@ const PasswordChangeModal = ({ handleCancel, handleSubmit }) => {
         <Modal>
             <span key="title">ChangePassword</span>
             <form key="body" className="box" onSubmit={submit}>
+                {errors && <p className="has-text-danger">{errors}</p>}
                 <div className="field">
                     <label className="label">Old Password:</label>
                     <div className="control">
-                        <input className="input" type="text" id="oldPassword" name="oldPassword" value={formData.oldPassword} onChange={handleChange} />
+                        <input className="input" type="password" id="oldPassword" name="oldPassword" value={formData.oldPassword} onChange={handleChange} />
                     </div>
                 </div>
                 <div className="field">
                     <label className="label">New Password:</label>
                     <div className="control">
-                        <input className="input" type="text" id="newPassword" name="newPassword" value={formData.newPassword} onChange={handleChange} />
+                        <input className="input" type="password" id="newPassword" name="newPassword" value={formData.newPassword} onChange={handleChange} />
                     </div>
                 </div>
                 <div className="field">
                     <label className="label">New Password Again:</label>
                     <div className="control">
-                        <input className="input" type="text" id="newPasswordVerify" name="newPasswordVerify" value={formData.newPasswordVerify} onChange={handleChange} />
+                        <input className="input" type="password" id="newPasswordVerify" name="newPasswordVerify" value={formData.newPasswordVerify} onChange={handleChange} />
                     </div>
                 </div>
                 <div className="button is-warning is-light is-outlined" onClick={() => handleCancel()}>Cancel</div>

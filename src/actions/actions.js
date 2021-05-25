@@ -312,7 +312,9 @@ function editUserDispatch(payload) {
 }
 
 export async function updatePass(d) {
+ 
     const { data } = await API.changePassword(d)
+
     return data
 }
 
@@ -320,3 +322,4 @@ export async function translateQuery(query, lang){
     const {data} = await API.translateWord(query,lang)
     return data
 }
+

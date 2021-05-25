@@ -10,9 +10,14 @@ import Routes from "./Routes"
 import jwt from "jsonwebtoken"
 import './App.css';
 import Footer from "./Footer"
+import useTimedMessage from "./hooks/useTimedMessage"
+
+
 
 function App() {
   const TOKEN_STORAGE_ID = 'token'
+  const [msgFlag, setMsgFlag] = useTimedMessage();
+console.log(setMsgFlag.toString())
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);

@@ -9,7 +9,10 @@ const Nav = ({ logout }) => {
         logout()
         history.push("/")
     }
-    const token = useSelector(store => store.userInfo.token)
+    const {token} = useSelector(store => store.userInfo)
+    let {profilePic} = useSelector(store => store.userInfo) || "https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg"
+    profilePic = profilePic ? profilePic : "https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg"
+    console.log(token, profilePic)
     const changeActive = () => {
         if(active){
             setActive(false)
@@ -49,7 +52,12 @@ const Nav = ({ logout }) => {
                                             <strong>Sign Out</strong>
                                         </button>
 
-                                        <NavLink className="navbar-item" to="/profile">Profile</NavLink>
+                                        <NavLink to="/profile">
+                                            <figure className="image is-64x64 pt-4">
+                                            
+                                            <img src={profilePic} alt=""/>
+                                            </figure>
+                                        </NavLink>
                                     </>
                                     :
 

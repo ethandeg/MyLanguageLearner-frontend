@@ -14,6 +14,7 @@ const Profile = () => {
     const [changePassword, setChangePassword] = useState(false)
     const INITIAL_STATE = { profilePic: user.profilePic || "" }
     const [formData, setFormData] = useState(INITIAL_STATE)
+    const [errors, setErrors] = useState(null)
 
     const changeEditMode = () => {
         if (editMode) {
@@ -52,9 +53,18 @@ const Profile = () => {
             if (newPasswordVerify !== newPassword) throw new Error("Please check your passwords, make sure they are the same")
             await updatePass({ username: user.username, oldPassword, newPassword })
             changePasswordMode()
+            setErrors(null)
 
         } catch (e) {
-            console.error("something went wrong", e)
+           if(e.response){
+               if(e.response.status ===400){
+                   setErrors("Invalid Password")
+               }
+           } else {
+               setErrors(e.message)
+           }
+
+
         }
 
     }
@@ -64,7 +74,7 @@ const Profile = () => {
 
             <div className="container">
 
-                <h1>Hello from the profile page! {user.username}</h1>
+                <h1 className="title has-text-primary">Profile</h1>
                 <div className="columns mt-6">
                     <div className="column is-two-thirds">
                         <div className="box">
@@ -109,7 +119,7 @@ const Profile = () => {
                         <button className="button is-danger is-outlined" onClick={changePasswordMode}>Change Password</button>
                     </div>
                 </div>
-                {changePassword && <PasswordChangeModal handleCancel={changePasswordMode} handleSubmit={changePasswordSubmit} />}
+                {changePassword && <PasswordChangeModal handleCancel={changePasswordMode} handleSubmit={changePasswordSubmit} errors={errors}/>}
 
                 <div className="columns mt-6">
                     <div className="column is-full has-text-primary">

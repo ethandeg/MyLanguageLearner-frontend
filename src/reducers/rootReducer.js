@@ -5,9 +5,11 @@ import {
 } from "../actions/actionTypes"
 
 
-const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: [] }
+
+const INITIAL_STATE = { decks: [], allLanguages: [], userInfo: {}, userLanguages: [], lessons: []}
 function rootReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
+        
         case ADD_ALL_LANGUAGES:
             return { ...state, allLanguages: action.payload }
 
@@ -87,13 +89,7 @@ function rootReducer(state = INITIAL_STATE, action) {
             }
 
         case LOAD_SUBUNIT_DATA:
-            //initial api request has langCode and subUnit number
-            //userLessons is the response from the api
-            //will need langCode
-            //userLessons state => 
-            //{langCode:
-            // subunitNumber:
-            // material : [{seg, trans}]}
+
             return { ...state, lessons: [...state.lessons, { languageCode: action.languageCode, subUnit: action.subUnit, material: action.payload }] }
 
         case POST_EXPERIENCE:
