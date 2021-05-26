@@ -14,7 +14,7 @@ const Home = () => {
                         </div>
                         <h2 className="subtitle is-4">Your One-Stop Shop Language Preperation Tool for Traveling</h2>
                         <div className="mt-6">
-                            <button className="button is-warning is-light is-outlined mr-1">Get Started</button>
+                            <Link to="/register" className="button is-warning is-light is-outlined mr-1">Get Started</Link>
                             <a href="#how-works" className="button is-info is-light is-outlined ml-1">See more first</a>
                         </div>
                     </div>
@@ -82,13 +82,17 @@ const Home = () => {
                 </div>
             </section>
 
-        <section className="hero is-secondary">
+        <section className="hero is-secondary mb-6">
             <h1 className="title is-3 has-text-info has-text-centered">See Our large selection of languages!</h1>
             <div className="container">
                 <div className="columns is-multiline">
+                
                 {languages.map(lang => (
+                    <div className="column is-one-quarter">
                 <LanguageIcon language={lang} key={lang.code} />
+                </div>
                     ))}
+
                 </div>
             </div>
 

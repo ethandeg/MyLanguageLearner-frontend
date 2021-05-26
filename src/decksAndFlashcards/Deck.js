@@ -36,9 +36,9 @@ const Deck = ({ deck }) => {
     }
 
     return (
-        <div className="column is-one-third">
 
-            <div className="card">
+
+            <div className="card" style={{zIndex: "0"}}>
                 <div style={{ float: "right" }} className="mt-2 mr-4">
                     <i className="far fa-trash-alt has-text-danger content is-medium" onClick={deckDelete}>&nbsp;</i>
                     <i onClick={changeEditMode} className="far fa-edit has-text-primary content is-medium"></i>
@@ -56,11 +56,11 @@ const Deck = ({ deck }) => {
                         </form>
 
                         :
-                        <p className="card-content title is-5"><Link style={{ display: "block", width: "100%", height: "100%" }} to={`/decks/${deck.id}`}>{deck.name}</Link></p>
+                        <p className="card-content title is-5"><Link to={`/decks/${deck.id}`}>{deck.name}</Link></p>
                     }
                 </div>
             </div>
-        </div>
+
     )
 }
 

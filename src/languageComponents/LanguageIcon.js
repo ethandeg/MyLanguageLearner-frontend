@@ -2,7 +2,6 @@
 const LanguageIcon = ({ language, children }) => {
 
     return (
-        <div className="column is-one-third">
             <div className="card">
                 <div className="card-image">
                     <figure className="image is-5by3">
@@ -13,10 +12,13 @@ const LanguageIcon = ({ language, children }) => {
                     <p className="card-header-title is-centered">
                         {language.name}
                     </p>
-                {children && children}
+                {children && 
+                <div style={{position:"absolute", right: "0%"}}>
+                    {children}
+                </div>
+                }
                 </div>
             </div>
-        </div>
     )
 }
 

@@ -82,11 +82,13 @@ const NewFlashCardForm = ({submit, deckId}) => {
             <label className="label">Front side:</label>
             <div className="control">
                 <input className="input" type="text" id="frontSide" name="frontSide" value={formData.frontSide} onChange={handleChange} />
-                {formData.frontSide ?
-                    <div className="button is-link" onClick={setTranslateMode}>Translate</div>                    
+                {formData.frontSide && userLanguages.length ?
+                    <div className="button is-link" onClick={setTranslateMode}>Translate</div>
+                                        
                 :
-
-                    <div className="button is-link" disabled>Translate</div>   
+                <>
+                    <div className="button is-link" disabled>Translate</div> 
+                    </>  
                 }
 
             </div>
