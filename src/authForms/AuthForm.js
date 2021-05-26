@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
-const AuthForm = ({ submit }) => {
+import { useHistory, Link } from "react-router-dom"
+
+const AuthForm = ({ submit, type }) => {
     const history = useHistory()
     const INITIAL_STATE = { username: '', password: '' }
     const [formData, setFormData] = useState(INITIAL_STATE)
@@ -17,24 +18,25 @@ const AuthForm = ({ submit }) => {
         e.preventDefault()
         try {
             const res = await submit(formData)
-            console.log(res)
             setFormData(INITIAL_STATE)
-            if(res.response) {
-                setErrors(res.response.data.error.message)
-                throw new Error(res.response.data.error.message)
-            }
+            if(res.response) throw new Error(res.response.data.error.message)
             history.push("/")
         } catch (e) {
-
+            setErrors(e.message)
         }
 
 
     }
 
+    const title = type === "login" ? "Login": "Register"
+    const footer = type === "login" ? <Link to="/register">Don't have an account? Click here to register.</Link> : <Link to="/login">Already have an account? Click here to login</Link>
     return (
-        <div className="container">
-
-            <form className="box mt-6" onSubmit={handleSubmit}>
+        <div className="container my-6">
+            <div className="columns">
+                <div className="column"></div>
+                <div className="column is-half">
+                <form className="box mt-6" onSubmit={handleSubmit}>
+            <h2 className="title is-4 has-text-centered has-text-primary">{title}</h2>
                 {errors && <p className="has-text-danger">{errors}</p>}
                 <div className="field">
                     <label className="label">Username</label>
@@ -49,9 +51,14 @@ const AuthForm = ({ submit }) => {
                         <input className="input" type="password" placeholder="********" id="password" name="password" value={formData.password} onChange={handleChange} />
                     </div>
                 </div>
-
-                <button className="button is-primary">Authenticate</button>
+                <div className="has-text-centered">{footer}</div>
+                <button className="button is-primary">{title}</button>
             </form>
+                </div>
+                <div className="column"></div>
+            </div>
+            
+
         </div>
     )
 }

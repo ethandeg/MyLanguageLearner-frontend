@@ -1,12 +1,12 @@
 
 import 'bulma/css/bulma.css'
 
-import Nav from "./Nav"
+import Nav from "./routesAndNav/Nav"
 import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import API from "./API"
-import Routes from "./Routes"
+import Routes from "./routesAndNav/Routes"
 import jwt from "jsonwebtoken"
 import './App.css';
 import Footer from "./Footer"

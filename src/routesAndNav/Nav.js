@@ -36,12 +36,18 @@ const Nav = ({ logout }) => {
                 </div>
                 <div id="navbarBasicExample" className={`navbar-menu ${classNames}`}>
                     <div className="navbar-start">
-                        <NavLink className="navbar-item" to="/languages">
-                            Languages
-                    </NavLink>
+
+                    {token &&
+                    <>
+                                 <NavLink className="navbar-item" to="/languages">
+                                            Languages
+                                </NavLink>
                         <NavLink className="navbar-item" to="/decks">
-                            Decks
-                    </NavLink>
+                        Decks
+                        </NavLink>       
+                        </>             
+                    }
+
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
