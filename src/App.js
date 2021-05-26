@@ -1,6 +1,4 @@
-
 import 'bulma/css/bulma.css'
-
 import Nav from "./routesAndNav/Nav"
 import { loadLanguages, loadUserData, removeUserInfo, loadUserToken } from "./actions/actions"
 import { useEffect, useState } from "react"
@@ -11,7 +9,7 @@ import jwt from "jsonwebtoken"
 import './App.css';
 import Footer from "./Footer"
 import useTimedMessage from "./hooks/useTimedMessage"
-import { Redirect } from 'react-router'
+
 
 
 

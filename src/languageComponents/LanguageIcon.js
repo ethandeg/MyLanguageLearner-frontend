@@ -1,15 +1,6 @@
-import {useDispatch, useSelector} from "react-redux"
-import {startLearning, quitLearning} from "../actions/actions"
-import {Link} from "react-router-dom"
-const LanguageIcon = ({ language, learning }) => {
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.userInfo)
-    const addLanguage = () => {
-        dispatch(startLearning(user.username, language.code))
-    }
-    const removeLanguage = () => {
-        dispatch(quitLearning(user.username, language.code))
-    }
+
+const LanguageIcon = ({ language, children }) => {
+
     return (
         <div className="column is-one-third">
             <div className="card">
@@ -22,15 +13,7 @@ const LanguageIcon = ({ language, learning }) => {
                     <p className="card-header-title is-centered">
                         {language.name}
                     </p>
-                    {learning 
-                    ?
-                    <>
-                    <Link className="button is-info is-light" to ={`/learn/${language.code}`}>Go</Link>
-                    <button className="button is-danger is-light" onClick={removeLanguage}>-</button>
-                    </> 
-                    :
-                    <button className="button is-success is-light mb-0" onClick={addLanguage}>+</button>
-                     }
+                {children && children}
                 </div>
             </div>
         </div>
