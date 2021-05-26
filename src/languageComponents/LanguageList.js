@@ -21,16 +21,16 @@ const LanguageList = () => {
                 {languages && languages.map(lang => (
                     arrayLangs.includes(lang.code)
                      ?
-                     <div className="column is-one-third">
-                    <LanguageIcon language={lang} key={lang.code}>
+                     <div className="column is-one-third" key={lang.code}>
+                    <LanguageIcon language={lang}>
                     <Link className="button is-info is-light" to ={`/learn/${lang.code}`}>Go</Link>
                     <button className="button is-danger is-light" onClick={()=> removeLanguage(lang.code)}>-</button>
                     </LanguageIcon>
 
                      </div>
                      :
-                     <div className="column is-one-third">
-                    <LanguageIcon language={lang} key={lang.code}>
+                     <div className="column is-one-third" key={lang.code}>
+                    <LanguageIcon language={lang}>
                     <button className="button is-success is-light mb-0" onClick={() => addLanguage(lang.code)}>+</button>
                     </LanguageIcon>
                     
