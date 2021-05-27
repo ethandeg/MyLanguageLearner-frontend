@@ -26,8 +26,8 @@ export function loadUserData(uName) {
         const res = await API.getUserInfo(uName)
         dispatch(loadDeckDispatch(res.data.deck))
         dispatch(loadUserLanguageDataDispatch(res.data.languages))
-        const { username, experience, profilePic } = res.data
-        dispatch(loadUserDataDispatch({ username, experience, profilePic }))
+        const { username, experience, profilePic, email, admin } = res.data
+        dispatch(loadUserDataDispatch({ username, experience, profilePic, email, admin }))
     }
 }
 
