@@ -133,7 +133,7 @@ function addFlashCardDispatch(deckId, id, frontSide, backSide) {
 export function startLearning(username, languageCode) {
     return async function (dispatch) {
         const { data } = await API.startLearning(username, languageCode)
-        dispatch(startLearningDispatch(data.username, data.languageCode))
+        dispatch(startLearningDispatch(data.name, data.languageCode))
     }
 }
 

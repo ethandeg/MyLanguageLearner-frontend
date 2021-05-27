@@ -68,7 +68,8 @@ function rootReducer(state = INITIAL_STATE, action) {
             }
 
         case START_LEARNING:
-            return { ...state, userLanguages: [...state.userLanguages, action.payload] }
+            const startLearningLanguage = state.allLanguages.find(lang => lang.code === action.payload.languageCode)
+            return { ...state, userLanguages: [...state.userLanguages, {languageCode: startLearningLanguage.code, name: startLearningLanguage.name}] }
 
         case QUIT_LEARNING:
 
