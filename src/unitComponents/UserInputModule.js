@@ -157,8 +157,8 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
             </Modal>
             </>
             }
-            <div className="box has-text-centered p-6" style={{ marginTop: "15%" }}>
-                <h1>{card.segment}</h1>
+            <div className="box has-text-centered" style={{ marginTop: "15%", paddingTop: "15%", paddingBottom: "15%" }}>
+                <h1 className="title is-2 has-text-primary">{card.segment}</h1>
             </div>
             <GuessForm submit={checkAnswer} />
         </>

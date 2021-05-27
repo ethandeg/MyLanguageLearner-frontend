@@ -13,7 +13,7 @@ const LanguageIcon = ({ language, children }) => {
                         {language.name}
                     </p>
                 {children && 
-                <div style={{position:"absolute", right: "0%"}}>
+                <div style={{position:"absolute", right: "0%", bottom: "0%"}}>
                     {children}
                 </div>
                 }

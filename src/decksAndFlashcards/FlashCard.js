@@ -9,7 +9,7 @@ const FlashCard = ({ card }) => {
         }
     }
     return (
-        <div className="column" onClick={flipCard} style={{ cursor: "pointer" }}>
+        <div onClick={flipCard} style={{ cursor: "pointer" }}>
             <div className="card py-6">
                 <div className="card-content has-text-centered">
                     {side}

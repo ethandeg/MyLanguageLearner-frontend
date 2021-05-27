@@ -84,17 +84,17 @@ const Home = () => {
 
         <section className="hero is-secondary mb-6">
             <h1 className="title is-3 has-text-info has-text-centered">See Our large selection of languages!</h1>
-            <div className="container">
-                <div className="columns is-multiline">
+
+                <div className="columns is-multiline is-mobile">
                 
                 {languages.map(lang => (
-                    <div className="column is-one-quarter">
+                    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen">
                 <LanguageIcon language={lang} key={lang.code} />
                 </div>
                     ))}
 
                 </div>
-            </div>
+
 
 
 

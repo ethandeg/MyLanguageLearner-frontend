@@ -43,7 +43,9 @@ const DeckPreview = () => {
                 </div>
                     <div className="columns is-multiline mt-6">
                         {deck && deck.cards.map(card => (
-                            <FlashCardPreview key ={card.id} card={card}/>
+                            <div key={card.id} className="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
+                            <FlashCardPreview card={card}/>
+                            </div>
                         ))}
                     </div>
                 </div>

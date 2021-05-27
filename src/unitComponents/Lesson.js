@@ -71,10 +71,15 @@ const Lesson = ({ subUnit }) => {
 
             {subUnit && currFlashCard
                 ?
-                <>
+                <div className="columns">
+                    <div className="column is-one-quarter"></div>
+                    <div className="column is-half">
                     <FlashCard key={currentCard} card={{ frontSide: currFlashCard.translation[0], backSide: currFlashCard.segment }} />
                     <button onClick={nextCard} className="button is-info">Next Card</button>
-                </>
+                    </div>
+                    <div className="column is-one-quarter"></div>
+
+                </div>
                 :
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! Ready to bump up the difficulty?</h2>
@@ -93,10 +98,15 @@ const Lesson = ({ subUnit }) => {
 
             {subUnit && currFlashCard
                 ?
-                <>
+                <div className="columns">
+                    <div className="column is-one-quarter"></div>
+                    <div className="column is-half">
                     <FlashCard key={currentCard} card={{ backSide: currFlashCard.translation[0], frontSide: currFlashCard.segment }} />
                     <button onClick={nextCard} className="button is-info">Next Card</button>
-                </>
+                    </div>
+                    <div className="column is-one-quarter"></div>
+
+                </div>
                 :
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! Ready to bump up the difficulty?</h2>
@@ -112,10 +122,15 @@ const Lesson = ({ subUnit }) => {
         <>
             {subUnit && currFlashCard
                 ?
-                <>
+                <div className="columns">
+                    <div className="column is-one-quarter"></div>
+                    <div className="column is-two-half">
                     <UserInputModule card={currFlashCard} nextCard={nextCard} gotItRight={gotItRight} gotItWrong={gotItWrong}/>
-                    <button onClick={changeRotation} className="button is-primary">Next Rotation</button>
-                </>
+
+                    </div>
+                    <div className="column is-one-quarter"></div>
+
+                </div>
                 :
                 <>
                     <h2 className="title is-2 has-text-info">Congratulations! You completed the subunit!</h2>

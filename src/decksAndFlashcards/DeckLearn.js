@@ -32,12 +32,18 @@ const DeckLearn = () => {
     try {
         return (
             <div className="container mt-6 p-6">
+                
                     {deck && deck.cards[cardNumber] ?
-                    <>
+                    <div className="columns">
+                        <div className="column is-one-quarter"></div>
+
+                    <div className="column is-half">
                     <FlashCard key={deck.cards[cardNumber].id} card={deck.cards[cardNumber]}/>
                     <button className="button is-primary is-pulled-right mr-2" onClick={changeCard}>Next</button>
                     <button className="button is-info is-pulled-left ml-2" onClick={startOver}>Start Over</button>
-                    </>                  
+                    </div>
+                    <div className="column is-one-quarter"></div>
+                    </div>                  
                     :
                     <div className="container">
                         <div className="columns is-centered">
@@ -48,6 +54,7 @@ const DeckLearn = () => {
                         </div>                    
                     </div>
                     }
+                    
 
             </div>
         )

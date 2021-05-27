@@ -26,9 +26,9 @@ const Decks = () => {
 
             }
             {/* break off into a seperate component, have flashcards use it too! */}
-            <div className="columns mt-6 is-multiline">
+            <div className="columns mt-6 is-multiline is-mobile">
                 {decks.length ? decks.map(deck => (
-                    <div className="column is-one-third" key={deck.id}>
+                    <div className="column is-full-mobile is-half-tablet is-one-third-desktop" key={deck.id}>
                     <Deck deck={deck} />
                     </div>
                 )) : <p>You don't have any flashcard decks yet</p>}

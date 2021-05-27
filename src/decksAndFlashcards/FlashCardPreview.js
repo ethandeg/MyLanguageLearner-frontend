@@ -36,7 +36,7 @@ const FlashCardPreview = ({card}) => {
     }
 
     return (
-        <div className="column is-one-quarter">
+  
 
         <div className="card">
             <div className="content" style={{float: "right"}}>
@@ -59,7 +59,7 @@ const FlashCardPreview = ({card}) => {
             }
 
         </div>
-        </div>
+
     )
 }
 

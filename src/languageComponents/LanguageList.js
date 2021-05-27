@@ -17,21 +17,21 @@ const LanguageList = () => {
     
     return (
         <div className="container mt-6">
-            <div className="columns is-multiline">
+            <div className="columns is-mobile is-multiline">
                 {languages && languages.map(lang => (
                     arrayLangs.includes(lang.code)
                      ?
-                     <div className="column is-one-third" key={lang.code}>
+                     <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen" key={lang.code}>
                     <LanguageIcon language={lang}>
-                    <Link className="button is-info is-light" to ={`/learn/${lang.code}`}>Go</Link>
-                    <button className="button is-danger is-light" onClick={()=> removeLanguage(lang.code)}>-</button>
+                    <Link className="button is-info is-light is-small" to ={`/learn/${lang.code}`}>Go</Link>
+                    <button className="button is-danger is-light is-small" onClick={()=> removeLanguage(lang.code)}>-</button>
                     </LanguageIcon>
 
                      </div>
                      :
-                     <div className="column is-one-third" key={lang.code}>
+                     <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen" key={lang.code}>
                     <LanguageIcon language={lang}>
-                    <button className="button is-success is-light mb-0" onClick={() => addLanguage(lang.code)}>+</button>
+                    <button className="button is-success is-light mb-0 is-small" onClick={() => addLanguage(lang.code)}>+</button>
                     </LanguageIcon>
                     
                     </div>
