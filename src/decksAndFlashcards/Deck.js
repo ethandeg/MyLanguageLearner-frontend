@@ -40,8 +40,8 @@ const Deck = ({ deck }) => {
 
             <div className="card" style={{zIndex: "0"}}>
                 <div style={{ float: "right" }} className="mt-2 mr-4">
-                    <i className="far fa-trash-alt has-text-danger content is-medium" onClick={deckDelete}>&nbsp;</i>
-                    <i onClick={changeEditMode} className="far fa-edit has-text-primary content is-medium"></i>
+                    <i className="far fa-trash-alt has-text-danger content is-medium" style={{cursor: "pointer"}} onClick={deckDelete}>&nbsp;</i>
+                    <i onClick={changeEditMode} className="far fa-edit has-text-primary content is-medium" style={{cursor: "pointer"}}></i>
                 </div>
                 <div className="has-text-centered p-6">
                     {editMode

@@ -40,8 +40,8 @@ const FlashCardPreview = ({card}) => {
 
         <div className="card">
             <div className="content" style={{float: "right"}}>
-                <i className="far fa-trash-alt has-text-danger" onClick={deleteCard}></i>
-                <i className="far fa-edit has-text-primary mx-2" onClick={changeEditMode}></i>
+                <i className="far fa-trash-alt has-text-danger" style={{cursor: "pointer"}} onClick={deleteCard}></i>
+                <i className="far fa-edit has-text-primary mx-2" style={{cursor: "pointer"}} onClick={changeEditMode}></i>
             </div>
 
             {editMode 
