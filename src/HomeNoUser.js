@@ -88,8 +88,8 @@ const Home = () => {
                 <div className="columns is-multiline is-mobile">
                 
                 {languages.map(lang => (
-                    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen">
-                <LanguageIcon language={lang} key={lang.code} />
+                    <div key={lang.code} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen">
+                <LanguageIcon language={lang}  />
                 </div>
                     ))}
 

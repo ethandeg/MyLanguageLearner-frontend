@@ -12,21 +12,24 @@ const Profile = () => {
     const decks = useSelector(store => store.decks)
     const [editMode, setEditMode] = useState(false)
     const [changePassword, setChangePassword] = useState(false)
-    const INITIAL_STATE = { profilePic: user.profilePic || "" }
+    const INITIAL_STATE = { profilePic: user.profilePic || "", email: user.email || ""}
     const [formData, setFormData] = useState(INITIAL_STATE)
     const [errors, setErrors] = useState(null)
 
     const changeEditMode = () => {
         if (editMode) {
             setEditMode(false)
+            setErrors(null)
         } else {
             setEditMode(true)
+            setFormData(INITIAL_STATE)
         }
     }
 
     const changePasswordMode = () => {
         if (changePassword) {
             setChangePassword(false)
+            setErrors(false)
         } else {
             setChangePassword(true)
         }
@@ -41,22 +44,30 @@ const Profile = () => {
     }
 
     const handleSubmit = e => {
-        e.preventDefault()
-        dispatch(editUser(user.username, formData))
-        setFormData(INITIAL_STATE)
+        try {
+            e.preventDefault()
+            if(!formData.email.includes("@")) throw ["You need a valid email address please"]
+            dispatch(editUser(user.username, formData))
+            setFormData(INITIAL_STATE)
+            changeEditMode()
+        } catch(e){
+            setErrors(e)
+        }
+
     }
 
     const changePasswordSubmit = async (data) => {
         const { oldPassword, newPassword, newPasswordVerify } = data
 
         try {
-            if (newPasswordVerify !== newPassword) throw new Error("Please check your passwords, make sure they are the same")
+            if (newPasswordVerify !== newPassword) throw ["Please check your passwords, make sure they are the same"]
             await updatePass({ username: user.username, oldPassword, newPassword })
             changePasswordMode()
             setErrors(null)
 
         } catch (e) {
-            setErrors(e)}
+            setErrors(e)
+        }
 
     }
 
@@ -148,11 +159,19 @@ const Profile = () => {
                     ?
                     <div className="box">
                         <form onSubmit={handleSubmit}>
+                            {errors && <p className="has-text-danger">{errors}</p>}
+
                             <p>Username: <strong>{user.username}</strong></p>
                             <div className="field has-addons">
                                 <label className="label has-text-primary">Profile Picture:</label>
                                 <div className="control">
                                     <input type="text" name="profilePic" id="profilePic" value={formData.profilePic} onChange={handleChange} />
+                                </div>
+                            </div>
+                            <div className="field has-addons">
+                                <label className="label has-text-primary">Email:</label>
+                                <div className="control">
+                                    <input type="text" name="email" id="email" value={formData.email} onChange={handleChange} />
                                 </div>
                             </div>
                             <button className="button is-primary is-light">Submit</button>
@@ -163,6 +182,7 @@ const Profile = () => {
                     <div className="box">
                         <p>Username: <strong>{user.username}</strong></p>
                         <p>Profile Picture: <strong>{user.profilePic}</strong></p>
+                        <p>Email: <strong>{user.email}</strong></p>
                     </div>
                 }
 

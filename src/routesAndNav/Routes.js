@@ -8,7 +8,6 @@ import DeckLearn from "../decksAndFlashcards/DeckLearn"
 import Learn from "../unitComponents/Learn"
 import SubUnit from "../unitComponents/SubUnit"
 import Profile from "../profileComponents/Profile"
-
 import Secret from "../Secret"
 import PrivateRoute from "./PrivateRoute"
 import LoggedOutRoute from "./LoggedOutRoute"
@@ -18,7 +17,6 @@ const Routes = ({ login, register }) => {
         <Switch>
             <Route exact path="/"> <Home /></Route>
             <PrivateRoute exact path ="/profile"> <Profile /></PrivateRoute>
-
             <PrivateRoute exact path="/languages"> <LanguageList /></PrivateRoute>
             <PrivateRoute exact path="/decks"> <Decks /></PrivateRoute>
             <Route exact path="/decks/:id"> <DeckPreview /></Route>
