@@ -1,5 +1,5 @@
 import FlashCard from "../decksAndFlashcards/FlashCard"
-import { useState, useEffect } from "react"
+import { useState} from "react"
 import UserInputModule from "./UserInputModule"
 import {useDispatch, useSelector} from "react-redux"
 import {postExperience, finishLesson} from "../actions/actions"

@@ -8,7 +8,7 @@ const NewFlashCardForm = ({submit, deckId}) => {
     const [languageSelector, setLanguageSelector] = useState(false)
     const [translationSegment, setTranslationSegment] = useState(null)
     const userLanguages = useSelector(state => state.userLanguages)
-    console.log(formData)
+
     const handleChange = e => {
         const {name, value} = e.target;
         setFormData(fData => ({
@@ -30,7 +30,7 @@ const NewFlashCardForm = ({submit, deckId}) => {
             const res = await translateQuery(formData.frontSide, lang)
             setTranslationSegment(res)
         } catch(e){
-            console.log(e)
+
         }
 
     }
@@ -50,7 +50,7 @@ const NewFlashCardForm = ({submit, deckId}) => {
         }
     }
     const handleRadioChange = e => {
-        console.log(e.target.value)
+
         setFormData({...formData, backSide: e.target.value})
     }
     if(translationSegment) return (

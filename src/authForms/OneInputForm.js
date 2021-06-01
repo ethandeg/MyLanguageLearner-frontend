@@ -18,13 +18,13 @@ const OneInputForm = ({submit, title, name}) => {
     return (
         <form className="box mt-6" onSubmit={handleSubmit}>
             <h3 className="title has-text-centered is-5 has-text-primary">{title}</h3>
-            <div class="field has-addons is-centered" style={{ marginLeft: "21%" }}>
-                <div class="control">
+            <div className="field has-addons is-centered" style={{ marginLeft: "21%" }}>
+                <div className="control">
 
                     <input className="input" type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
                 </div>
-                <div class="control">
-                    <button class="button is-info">
+                <div className="control">
+                    <button className="button is-info">
                         +
                     </button>
                 </div>

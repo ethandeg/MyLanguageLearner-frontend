@@ -146,7 +146,7 @@ function startLearningDispatch(username, languageCode) {
 
 export function quitLearning(username, languageCode) {
     return async function (dispatch) {
-        const res = await API.quitLearning(username, languageCode)
+        await API.quitLearning(username, languageCode)
         dispatch(quitLearningDispatch(languageCode))
     }
 }
@@ -283,7 +283,7 @@ function deleteFlashCardDispatch(payload) {
 export function editFlashCard(id, frontSide, backSide, deckId) {
     return async function (dispatch) {
         const { data } = await API.editFlashCard(id, frontSide, backSide)
-        dispatch(editFlashCardDispatch({ id, frontSide, backSide, deckId }))
+        dispatch(editFlashCardDispatch({ id: data.id, frontSide: data.frontSide, backSide: data.backSide, deckId: data.deckId }))
     }
 }
 

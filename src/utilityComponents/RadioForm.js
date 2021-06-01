@@ -3,10 +3,7 @@ const RadioForm = ({submit, values, name,primaryKey, label}) => {
     const INITIAL_STATE = {[name]: ''}
 
     const [formData, setFormData] = useState(INITIAL_STATE)
-    console.log(formData)
-    console.log(values[0])
-    console.log(primaryKey)
-    console.log(values[0].languageCode)
+
     const handleChange = e => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -36,21 +33,6 @@ const RadioForm = ({submit, values, name,primaryKey, label}) => {
         </form>
     )
 }
-// return (
-//     <div className="container">
-//         <form onSubmit={handleSubmit}>
-//             {decks.map(deck => (
-//                 <div className="control">
-//                 <label className="radio">
-//                 <input key={deck.id} type="radio" value={deck.id} onChange={handleChange} id="deckId" name="deckId" /> 
-//                 <strong>{deck.name}</strong>
-//                 </label>
-//                 </div>
-//             ))}
-//             <div onClick ={() => cancel()} className="button is-warning is-light is-outlined mr-5">Cancel</div>
-//             <button className="button is-primary is-light is-outlined">Save</button>
-//         </form>
 
-//     </div>
 
 export default RadioForm

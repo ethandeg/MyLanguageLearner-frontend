@@ -5,7 +5,6 @@ import { useEffect } from "react"
 import FlashCardPreview from "./FlashCardPreview"
 import NewFlashCardForm from "../authForms/NewFlashCardForm"
 import {addFlashCard} from "../actions/actions"
-import OneInputForm from "../authForms/OneInputForm"
 const DeckPreview = () => {
     const dispatch = useDispatch()
     const { id } = useParams()

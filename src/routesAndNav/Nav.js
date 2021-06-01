@@ -12,7 +12,6 @@ const Nav = ({ logout }) => {
     const {token} = useSelector(store => store.userInfo)
     let {profilePic} = useSelector(store => store.userInfo) || "https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg"
     profilePic = profilePic ? profilePic : "https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg"
-    console.log(token, profilePic)
     const changeActive = () => {
         if(active){
             setActive(false)
@@ -26,13 +25,13 @@ const Nav = ({ logout }) => {
             <div className="container">
                 <div className="navbar-brand">
                     <NavLink className="navbar-item" to="/">
-                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png" width="112" height="28" alt="MyLanguageLearner"/>
                     </NavLink>
-                    <a role="button" onClick={changeActive} className={`navbar-burger ${classNames}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <button onClick={changeActive} className={`navbar-burger ${classNames}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
-                    </a>
+                    </button>
                 </div>
                 <div id="navbarBasicExample" className={`navbar-menu ${classNames}`}>
                     <div className="navbar-start">

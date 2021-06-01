@@ -51,7 +51,7 @@ const Profile = () => {
 
         try {
             if (newPasswordVerify !== newPassword) throw new Error("Please check your passwords, make sure they are the same")
-            const res = await updatePass({ username: user.username, oldPassword, newPassword })
+            await updatePass({ username: user.username, oldPassword, newPassword })
             changePasswordMode()
             setErrors(null)
 
@@ -75,10 +75,10 @@ const Profile = () => {
                                         {user.profilePic
 
                                             ?
-                                            <img src={user.profilePic} alt={`${user.username} profile picture`}></img>
+                                            <img src={user.profilePic} alt={`${user.username}`}></img>
                                             :
 
-                                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="placeholder profile picture"></img>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="placeholder"></img>
                                         }
                                     </p>
 

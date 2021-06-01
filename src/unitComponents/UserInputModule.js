@@ -2,18 +2,16 @@ import GuessForm from "../authForms/GuessForm"
 import { useState } from "react"
 import CloseAnswer from "./CloseAnswer"
 import Modal from "../utilityComponents/Modal"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector} from "react-redux"
 import AddToDeckForm from "../authForms/AddToDeckForm"
 import {addFlashCardNoDispatch} from "../actions/actions"
 const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
-    console.log(card)
-    const dispatch = useDispatch()
+
     const [answer, setAnswer] = useState(null)
     const [showDecks, setShowDecks] = useState(false)
-    //make answer an object {result: "wrong", guess: "something", answer: "nothing"}
+
     const [closeIndexes, setCloseIndexes] = useState(false)
-    //create logic to turn wrong answer into a flashcard for further studying
-    //populate with user decks to pick which one
+
     const decks = useSelector(state => state.decks)
 
 
@@ -63,7 +61,7 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
         setCloseIndexes(false)
     }
 
-    const wrongAnswer = (guess=null, answer=null) => {
+    const wrongAnswer = () => {
         setAnswer(false)
         nextCard()
         setCloseIndexes(false)
