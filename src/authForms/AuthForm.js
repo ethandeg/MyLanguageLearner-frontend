@@ -19,7 +19,7 @@ const AuthForm = ({ submit, type }) => {
         try {
             const res = await submit(formData)
             setFormData(INITIAL_STATE)
-            if(res.response) throw new Error(res.response.data.error.message)
+            if(Array.isArray(res)) throw new Error(res)
             history.push("/")
         } catch (e) {
             setErrors(e.message)

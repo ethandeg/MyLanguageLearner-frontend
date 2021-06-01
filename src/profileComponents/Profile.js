@@ -51,21 +51,12 @@ const Profile = () => {
 
         try {
             if (newPasswordVerify !== newPassword) throw new Error("Please check your passwords, make sure they are the same")
-            await updatePass({ username: user.username, oldPassword, newPassword })
+            const res = await updatePass({ username: user.username, oldPassword, newPassword })
             changePasswordMode()
             setErrors(null)
 
         } catch (e) {
-           if(e.response){
-               if(e.response.status ===400){
-                   setErrors("Invalid Password")
-               }
-           } else {
-               setErrors(e.message)
-           }
-
-
-        }
+            setErrors(e)}
 
     }
 

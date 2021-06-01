@@ -16,7 +16,6 @@ import useTimedMessage from "./hooks/useTimedMessage"
 function App() {
   const TOKEN_STORAGE_ID = 'token'
   const [msgFlag, setMsgFlag] = useTimedMessage();
-console.log(setMsgFlag.toString())
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);
@@ -43,6 +42,7 @@ console.log(setMsgFlag.toString())
         if(username){
           dispatch(loadUserData(username))
           dispatch(loadUserToken(token))
+          API.token = token
         }
       } catch(e){
         removeLocalStorage(TOKEN_STORAGE_ID)
