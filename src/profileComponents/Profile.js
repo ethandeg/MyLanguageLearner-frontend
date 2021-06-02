@@ -104,6 +104,7 @@ const Profile = ({message, timer}) => {
                                         <h3 className="title is-2 has-text-primary is-uppercase">
                                             <strong>{user.username}</strong>
                                         </h3>
+                                        <h4 className="title is-5 has-text-primary"><p>{user.admin ?"Admin" : "Language Learner"}</p></h4>
                                     </div>
                                     <nav className="level is-mobile">
                                         <div className="level-left">
@@ -114,9 +115,11 @@ const Profile = ({message, timer}) => {
                                                     </Link>
                                                 </div>
                                             ))}
-
+                                            
                                         </div>
+                                        
                                     </nav>
+                                    
                                 </div>
                             </article>
                         </div>
@@ -130,7 +133,7 @@ const Profile = ({message, timer}) => {
 
                 <div className="columns mt-6">
                     <div className="column is-full has-text-primary">
-                        <nav className="level">
+                        <nav className="level my-6">
                             <div className="level-item has-text-centered">
                                 <div>
                                     <p className="heading">Experience</p>
@@ -151,8 +154,8 @@ const Profile = ({message, timer}) => {
                             </div>
                             <div className="level-item has-text-centered">
                                 <div>
-                                    <p className="heading">Favorite Language</p>
-                                    <p className="title">{userLanguagesFull[0].name}</p>
+                                    <p className="heading">Class</p>
+                                    <p className="title"><p>{user.admin ?"Admin" : "Language Learner"}</p></p>
                                 </div>
                             </div>
                         </nav>
@@ -162,7 +165,7 @@ const Profile = ({message, timer}) => {
                 {editMode
 
                     ?
-                    <div className="box">
+                    <div className="box mb-6">
                         <form onSubmit={handleSubmit}>
                             {errors && <p className="has-text-danger">{errors}</p>}
 
@@ -184,7 +187,7 @@ const Profile = ({message, timer}) => {
                         </form>
                     </div>
                     :
-                    <div className="box">
+                    <div className="box mb-6">
                         <p>Username: <strong>{user.username}</strong></p>
                         <p>Profile Picture: <strong>{user.profilePic}</strong></p>
                         <p>Email: <strong>{user.email}</strong></p>

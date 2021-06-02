@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { NavLink, Link, useHistory } from "react-router-dom"
 import {useState} from "react"
 import Message from "../utilityComponents/Message"
-
+import MyLanguagelearnerLogo from "../assets/MyLanguageLearnerLogo.png"
 const Nav = ({ logout, timer, message }) => {
     const [active, setActive] = useState(false)
     const history = useHistory()
@@ -34,13 +34,13 @@ const Nav = ({ logout, timer, message }) => {
             <div className="container">
                 <div className="navbar-brand">
                     <NavLink className="navbar-item" to="/">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png" width="112" height="28" alt="MyLanguageLearner"/>
+                        <img src={MyLanguagelearnerLogo} alt="MyLanguageLearner"/>
                     </NavLink>
-                    <button onClick={changeActive} className={`navbar-burger ${classNames}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" onClick={changeActive} className={`navbar-burger ${classNames}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
-                    </button>
+                    </a>
                 </div>
                 <div id="navbarBasicExample" className={`navbar-menu ${classNames}`}>
                     <div className="navbar-start">
