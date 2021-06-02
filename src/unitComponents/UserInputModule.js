@@ -93,12 +93,7 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
 
     return (
         <>
-            {answer &&
-                <div className="notification is-info is-light">
-                    <button className="delete"></button>
-                    {answer.result}
-                </div>
-            }
+
             {closeIndexes && <>
             <Modal>
                 <span key="title">So Close!</span>   

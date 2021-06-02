@@ -3,12 +3,20 @@ import { useDispatch } from "react-redux"
 import { createNewDeck } from "../actions/actions"
 import OneInputForm from "../authForms/OneInputForm"
 import Deck from "./Deck"
-const Decks = () => {
+import Message from "../utilityComponents/Message"
+const Decks = ({timer, message}) => {
     const decks = useSelector(store => store.decks)
     const user = useSelector(store => store.userInfo)
     const dispatch = useDispatch()
     const handleSubmit = (data) => {
-        dispatch(createNewDeck(user.username, data.name))
+        try{
+            dispatch(createNewDeck(user.username, data.name))
+            timer(true)
+            message(<Message bodyClass="is-primary has-text-centered" content={`${data.name} succesfully created!`}/>)
+        } catch(e){
+            console.error(e)
+        }
+        
     }
     return (
         <div className="container mb-6">
@@ -28,7 +36,7 @@ const Decks = () => {
             <div className="columns mt-6 is-multiline is-mobile">
                 {decks.length ? decks.map(deck => (
                     <div className="column is-full-mobile is-half-tablet is-one-third-desktop" key={deck.id}>
-                    <Deck deck={deck} />
+                    <Deck deck={deck} timer={timer} message={message}/>
                     </div>
                 )) : <p>You don't have any flashcard decks yet</p>}
             </div>

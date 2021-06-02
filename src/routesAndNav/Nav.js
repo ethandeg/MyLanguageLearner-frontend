@@ -1,13 +1,22 @@
 import { useSelector } from "react-redux"
 import { NavLink, Link, useHistory } from "react-router-dom"
 import {useState} from "react"
+import Message from "../utilityComponents/Message"
 
-const Nav = ({ logout }) => {
+const Nav = ({ logout, timer, message }) => {
     const [active, setActive] = useState(false)
     const history = useHistory()
     const handleLogout = () => {
-        logout()
-        history.push("/")
+        try {
+            logout()
+            history.push("/")
+            timer(true)
+            message(<Message bodyClass="is-warning has-text-centered" content="Succesfully logged out"/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
+
     }
     const {token} = useSelector(store => store.userInfo)
     let {profilePic} = useSelector(store => store.userInfo) || "https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg"

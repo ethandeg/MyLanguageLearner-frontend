@@ -5,15 +5,23 @@ import { useEffect } from "react"
 import FlashCardPreview from "./FlashCardPreview"
 import NewFlashCardForm from "../authForms/NewFlashCardForm"
 import {addFlashCard} from "../actions/actions"
-const DeckPreview = () => {
+import Message from "../utilityComponents/Message"
+const DeckPreview = ({timer, message}) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const decks = useSelector(state => state.decks)
     const deck = decks.find(d => d.id === +id) || undefined
     const addCard = (id, front , back) => {
-        dispatch(addFlashCard(+id, front, back))
-        //error, isn't saving card id to redux
-        //redux cards have snake case, added ones have camel
+        try {
+            dispatch(addFlashCard(+id, front, back))
+            timer(true)
+            message(<Message bodyClass="is-success has-text-centered" content={`Created flashcard, front side: ${front}, back side: ${back}`}/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
+
+
     }
  
     useEffect(() => {
@@ -43,7 +51,7 @@ const DeckPreview = () => {
                     <div className="columns is-multiline mt-6">
                         {deck && deck.cards.map(card => (
                             <div key={card.id} className="column is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
-                            <FlashCardPreview card={card}/>
+                            <FlashCardPreview card={card} timer={timer} message={message}/>
                             </div>
                         ))}
                     </div>

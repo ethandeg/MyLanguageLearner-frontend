@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {loadLessonMaterial} from "../actions/actions"
 import Lesson from "./Lesson"
 
-const SubUnit = () => {
+const SubUnit = ({timer, message}) => {
     const {languageCode, subUnit} = useParams()
     const dispatch = useDispatch()
     const thisSubUnit = useSelector(state => state.lessons.find(lesson => {
@@ -24,7 +24,7 @@ const SubUnit = () => {
         <>
         {thisSubUnit 
         ?
-        <Lesson subUnit = {thisSubUnit} />         
+        <Lesson subUnit = {thisSubUnit} timer={timer} message={message}/>         
         :
          <h1>Loading subunits...</h1>
          }

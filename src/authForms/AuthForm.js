@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useHistory, Link } from "react-router-dom"
+import Message from "../utilityComponents/Message"
 
-const AuthForm = ({ submit, type }) => {
+const AuthForm = ({ submit, type, timer, message }) => {
     const history = useHistory()
     const INITIAL_STATE = { username: '', password: '' }
     const [formData, setFormData] = useState(INITIAL_STATE)
@@ -13,13 +14,15 @@ const AuthForm = ({ submit, type }) => {
             [name]: value
         }))
     }
-
+    const flashMessage = type === "login" ? "Welcome back" : "Welcome to MyLanguageLearner"
     const handleSubmit = async(e) => {
         e.preventDefault()
         try {
             const res = await submit(formData)
             setFormData(INITIAL_STATE)
             if(Array.isArray(res)) throw new Error(res)
+            timer(true)
+            message(<Message bodyClass="is-success has-text-centered" content={`${flashMessage} ${formData.username}`}/>)
             history.push("/")
         } catch (e) {
             setErrors(e.message)

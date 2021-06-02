@@ -3,12 +3,20 @@ import { useDispatch } from "react-redux"
 import { deleteDeck } from "../actions/actions"
 import { useState } from "react"
 import { editDeck } from "../actions/actions"
+import Message from "../utilityComponents/Message"
 
-const Deck = ({ deck }) => {
+const Deck = ({ deck, timer, message }) => {
     const [formData, setFormData] = useState({ deckName: deck.name })
     const [editMode, setEditMode] = useState(false)
     const dispatch = useDispatch()
     const deckDelete = () => {
+        try {
+            timer(true)
+            message(<Message bodyClass="is-warning has-text-centered" content="Deleted Succesfully"/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="something went wrong...try again please!"/>)
+        }
         dispatch(deleteDeck(deck.id))
     }
 
@@ -29,10 +37,18 @@ const Deck = ({ deck }) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(editDeck(deck.id, formData.deckName))
-        setFormData({ deckName: formData.deckName })
-        setEditMode(false)
+        try {
+            e.preventDefault();
+            dispatch(editDeck(deck.id, formData.deckName))
+            setFormData({ deckName: formData.deckName })
+            setEditMode(false)
+            timer(true)
+            message(<Message bodyClass="is-info has-text-centered" content={`${formData.deckName} has been changed!`}/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Oops...Something went wrong!"/>)
+        }
+
     }
 
     return (

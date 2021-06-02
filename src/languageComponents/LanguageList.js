@@ -2,14 +2,30 @@ import { useSelector, useDispatch } from "react-redux"
 import LanguageIcon from "./LanguageIcon"
 import {startLearning, quitLearning} from '../actions/actions'
 import {Link} from "react-router-dom"
-const LanguageList = () => {
+import Message from "../utilityComponents/Message"
+const LanguageList = ({timer, message}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.userInfo)
     const addLanguage = (code) => {
-        dispatch(startLearning(user.username, code))
+        try {
+            dispatch(startLearning(user.username, code))
+            timer(true)
+            message(<Message bodyClass="is-primary has-text-centered" content="Great! Let's get learning!"/>)
+        }catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
+
     }
     const removeLanguage = (code) => {
-        dispatch(quitLearning(user.username, code))
+        try {
+            dispatch(quitLearning(user.username, code))
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="I get it...You don't have the time to learn a new language..."/>)
+        }catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
     }
     //issue is probably no INITIAL STATE in reducer, so there is no emtpy arry
     const languages = useSelector(store => store.allLanguages) || undefined;

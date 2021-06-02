@@ -3,8 +3,9 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { editUser, updatePass } from "../actions/actions"
 import PasswordChangeModal from "./PasswordChangeModal"
+import Message from "../utilityComponents/Message"
 
-const Profile = () => {
+const Profile = ({message, timer}) => {
     const dispatch = useDispatch()
     const user = useSelector(store => store.userInfo)
     const userLanguages = useSelector(store => store.userLanguages.map(lang => lang.languageCode))
@@ -50,6 +51,8 @@ const Profile = () => {
             dispatch(editUser(user.username, formData))
             setFormData(INITIAL_STATE)
             changeEditMode()
+            timer(true)
+            message(<Message bodyClass="is-primary has-text-centered" content="Profile succesfully updated!"/>)
         } catch(e){
             setErrors(e)
         }
@@ -64,6 +67,8 @@ const Profile = () => {
             await updatePass({ username: user.username, oldPassword, newPassword })
             changePasswordMode()
             setErrors(null)
+            timer(true)
+            message(<Message bodyClass="is-primary has-text-centered" content="Password succesfully changed!"/>)
 
         } catch (e) {
             setErrors(e)
@@ -117,7 +122,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="column mt-6 ml-6">
-                        <button className="button is-info is-outlined" onClick={changeEditMode}>Edit Profile</button>
+                        <button className="button is-info is-outlined mr-6 mb-2" onClick={changeEditMode}>Edit Profile</button>
                         <button className="button is-danger is-outlined" onClick={changePasswordMode}>Change Password</button>
                     </div>
                 </div>

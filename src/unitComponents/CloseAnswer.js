@@ -1,9 +1,6 @@
 const CloseAnswer = ({ closeIndexes, realAnswer}) => {
     console.log(closeIndexes)
-    // const { indexes, guess, answer } = closeIndexes
-    // const {guess, answer} = realAnswer
-    // console.log(guess, answer)
-    console.log(realAnswer)
+
     return (
         <>
             <p> Correct Answer:

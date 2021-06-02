@@ -2,12 +2,21 @@ import {useDispatch} from "react-redux"
 import {deleteFlashCard} from "../actions/actions"
 import {useState} from "react"
 import {editFlashCard} from "../actions/actions"
-const FlashCardPreview = ({card}) => {
+import Message from "../utilityComponents/Message"
+const FlashCardPreview = ({card, timer, message}) => {
     const [formData, setFormData] = useState({flashFront: card.frontSide, flashBack: card.backSide})
     const [editMode, setEditMode] = useState(false)
     const dispatch = useDispatch()
     const deleteCard = () => {
-        dispatch(deleteFlashCard(card.id, card.deckId))
+        try{
+            dispatch(deleteFlashCard(card.id, card.deckId))
+            timer(true)
+            message(<Message bodyClass="is-warning has-text-centered" content="Deleted flashcard"/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
+        
     }
 
     const handleChange = e => {
@@ -27,12 +36,20 @@ const FlashCardPreview = ({card}) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const {id, deckId} = card
-        const {flashFront, flashBack} = formData
-        dispatch(editFlashCard(id, flashFront, flashBack, deckId))
-        setFormData({flashFront, flashBack})
-        setEditMode(false)
+        try {
+            e.preventDefault()
+            const {id, deckId} = card
+            const {flashFront, flashBack} = formData
+            dispatch(editFlashCard(id, flashFront, flashBack, deckId))
+            setFormData({flashFront, flashBack})
+            setEditMode(false)
+            timer(true)
+            message(<Message bodyClass="is-info has-text-centered" content={`New card information, front side ${flashFront}, backside ${flashBack}`}/>)
+        } catch(e){
+            timer(true)
+            message(<Message bodyClass="is-danger has-text-centered" content="Something didn't work correctly!"/>)
+        }
+
     }
 
     return (

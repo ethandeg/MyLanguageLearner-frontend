@@ -1,19 +1,18 @@
 import useTimedMessage from "./hooks/useTimedMessage"
 import Message from "./utilityComponents/Message"
-const Secret = () => {
+const Secret = ({timer, message}) => {
        const [myMsgFlag, setMyMsgFlag] = useTimedMessage();
 
        function somethingDidntWork() {
-         setMyMsgFlag(true);
+         timer(true)
+         message(<Message bodyClass="is-primary has-text-centered" content="and this is a message so you know, how does it work"/>)
        }
     
 
 
     return (
     <>
-    {myMsgFlag &&
-    <Message bodyClass="is-primary has-text-centered" content="and this is a message so you know, how does it work"/>
-    }
+
     <button onClick={somethingDidntWork}>click me</button>
     </>
     )

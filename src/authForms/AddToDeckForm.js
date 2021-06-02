@@ -21,7 +21,7 @@ const AddToDeckForm = ({decks, submit, cancel}) => {
         <div className="container">
             <form onSubmit={handleSubmit}>
                 {decks.map(deck => (
-                    <div className="control">
+                    <div className="control" key={deck.id}>
                     <label className="radio">
                     <input key={deck.id} type="radio" value={deck.id} onChange={handleChange} id="deckId" name="deckId" /> 
                     <strong>{deck.name}</strong>

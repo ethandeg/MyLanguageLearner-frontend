@@ -16,6 +16,10 @@ import useTimedMessage from "./hooks/useTimedMessage"
 function App() {
   const TOKEN_STORAGE_ID = 'token'
   const [msgFlag, setMsgFlag] = useTimedMessage();
+  // const [bannerFlag, setBannerFlag] = useTimedMessage(1500);
+  const [alertMsgContent, setAlertMsgContent] = useState()
+  //drill down setMsgFlag and setAlert Content
+  //in app have something like {msgFlag && alertMsgContent}
   //check local storage for token
   const findLocalStorage = (key) => {
     const item = localStorage.getItem(key);
@@ -93,9 +97,10 @@ function App() {
   // https://stackoverflow.com/questions/43727032/hero-footer-not-at-bottom-of-page
   return (
     <>
-      <Nav logout={logout} />
+      <Nav logout={logout} timer={setMsgFlag} message={setAlertMsgContent}/>
+      {msgFlag && alertMsgContent}
 
-        <Routes login={login} register={register} />
+        <Routes login={login} register={register} timer={setMsgFlag} message={setAlertMsgContent}/>
         <Footer/>
 
     </>

@@ -21,14 +21,19 @@ const Learn = () => {
 
 
     }, [dispatch, user, languageCode])
-    return (
-        <div className="container">
-            <h1 className="title is-2 has-text-primary">{languageCode}</h1>
-            {units && units.map(unit => (
-                <Units unit={unit} key={unit.id} languageCode={languageCode}/>
-            ))}
-        </div>
-    )
+    try{
+        return (
+            <div className="container">
+                <h1 className="title is-2 has-text-primary has-text-centered my-6">{userLanguage.name}</h1>
+                {units && units.map(unit => (
+                    <Units unit={unit} key={unit.id} languageCode={languageCode}/>
+                ))}
+            </div>
+        )
+    }catch(e){
+        return <p>Loading....</p>
+    }
+
 }
 
 export default Learn
