@@ -2,7 +2,7 @@ import {useSelector} from "react-redux"
 import {Link} from "react-router-dom"
 const Units = ({ unit, languageCode }) => {
     const completedLessons = useSelector(state => state.userLanguages.find(lang => lang.languageCode === languageCode).completedLessons)
-
+    console.log(unit)
     if(!completedLessons) return <h1>loading.....</h1>
     return (
         <article className="panel is-primary">
