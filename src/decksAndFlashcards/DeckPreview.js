@@ -6,6 +6,7 @@ import FlashCardPreview from "./FlashCardPreview"
 import NewFlashCardForm from "../authForms/NewFlashCardForm"
 import {addFlashCard} from "../actions/actions"
 import Message from "../utilityComponents/Message"
+import LoadingScreen from "../utilityComponents/LoadingScreen"
 const DeckPreview = ({timer, message}) => {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -61,7 +62,7 @@ const DeckPreview = ({timer, message}) => {
             </>
         )
     } catch (e){
-        return <p>Loading...</p>
+        return <LoadingScreen />
     }
 
 }

@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken"
 import './App.css';
 import Footer from "./Footer"
 import useTimedMessage from "./hooks/useTimedMessage"
-
+import LoadingScreen from "./utilityComponents/LoadingScreen"
 
 
 
@@ -92,7 +92,7 @@ function App() {
   }
 
   if (!isLoaded) {
-    return <h1>Loading....</h1>
+    return <LoadingScreen />
   }
   // https://stackoverflow.com/questions/43727032/hero-footer-not-at-bottom-of-page
   return (

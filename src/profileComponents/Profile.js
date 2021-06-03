@@ -4,6 +4,7 @@ import { useState } from "react"
 import { editUser, updatePass } from "../actions/actions"
 import PasswordChangeModal from "./PasswordChangeModal"
 import Message from "../utilityComponents/Message"
+import LoadingScreen from "../utilityComponents/LoadingScreen"
 
 const Profile = ({message, timer}) => {
     const dispatch = useDispatch()
@@ -198,7 +199,7 @@ const Profile = ({message, timer}) => {
             </div>
         )
     } catch (e) {
-        return <p>loading....</p>
+        return <LoadingScreen />
     }
 
 }

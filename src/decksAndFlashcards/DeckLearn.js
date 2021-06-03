@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {useEffect, useState} from "react"
 import {getFlashCards} from "../actions/actions"
 import FlashCard from "./FlashCard"
+import LoadingScreen from "../utilityComponents/LoadingScreen"
 const DeckLearn = () => {
     const {deckId} = useParams()
     const dispatch = useDispatch()
@@ -59,7 +60,7 @@ const DeckLearn = () => {
             </div>
         )
     } catch (e){
-        return <p>Loading...</p>
+        return <LoadingScreen />
     }
 }
 

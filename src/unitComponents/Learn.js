@@ -4,6 +4,7 @@ import { getUnits } from "../actions/actions"
 import { useParams } from "react-router-dom"
 import Units from "./Units"
 import { loadCompletedLessons } from "../actions/actions"
+import LoadingScreen from "../utilityComponents/LoadingScreen"
 const Learn = () => {
     const { languageCode } = useParams()
     const units = useSelector(state => state.units)
@@ -31,7 +32,7 @@ const Learn = () => {
             </div>
         )
     }catch(e){
-        return <p>Loading....</p>
+        return <LoadingScreen />
     }
 
 }

@@ -38,7 +38,7 @@ const Decks = ({timer, message}) => {
                     <div className="column is-full-mobile is-half-tablet is-one-third-desktop" key={deck.id}>
                     <Deck deck={deck} timer={timer} message={message}/>
                     </div>
-                )) : <p>You don't have any flashcard decks yet</p>}
+                )) : null}
             </div>
 
 

@@ -1,5 +1,6 @@
 import useTimedMessage from "./hooks/useTimedMessage"
 import Message from "./utilityComponents/Message"
+import LoadingScreen from "./utilityComponents/LoadingScreen"
 const Secret = ({timer, message}) => {
        const [myMsgFlag, setMyMsgFlag] = useTimedMessage();
 
@@ -13,7 +14,7 @@ const Secret = ({timer, message}) => {
     return (
     <>
 
-    <button onClick={somethingDidntWork}>click me</button>
+    <LoadingScreen />
     </>
     )
 }

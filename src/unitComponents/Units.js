@@ -1,9 +1,10 @@
 import {useSelector} from "react-redux"
 import {Link} from "react-router-dom"
+import LoadingScreen from "../utilityComponents/LoadingScreen"
 const Units = ({ unit, languageCode }) => {
     const completedLessons = useSelector(state => state.userLanguages.find(lang => lang.languageCode === languageCode).completedLessons)
-    console.log(unit)
-    if(!completedLessons) return <h1>loading.....</h1>
+
+    if(!completedLessons) return <LoadingScreen />
     return (
         <article className="panel is-primary">
             <p className="panel-heading">{unit.unitName} - {unit.unitNumber}</p>
