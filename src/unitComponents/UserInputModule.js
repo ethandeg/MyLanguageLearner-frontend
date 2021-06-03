@@ -85,7 +85,7 @@ const UserInputModule = ({ card, nextCard, gotItRight, gotItWrong }) => {
             await addFlashCardNoDispatch(deckId,card.translation[0],card.segment)
             wrongAnswer()
         } catch(e){
-            console.log(e)
+            console.error(e)
         }
         
     }

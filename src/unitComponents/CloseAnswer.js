@@ -1,5 +1,5 @@
 const CloseAnswer = ({ closeIndexes, realAnswer}) => {
-    console.log(closeIndexes)
+
 
     return (
         <>

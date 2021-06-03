@@ -300,7 +300,6 @@ function editFlashCardDispatch(payload) {
 export function editUser(username, d) {
     return async function (dispatch) {
         const { data } = await API.editUser(username, d)
-        console.log(data)
         dispatch(editUserDispatch(data))
     }
 }

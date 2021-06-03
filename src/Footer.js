@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+
 const Footer = () => {
     return (
         <footer className="footer" >
@@ -8,18 +8,9 @@ const Footer = () => {
                         <div className="content is-medium">
                             <h6>My Language Learner</h6>
                             <hr></hr>
-                            <p>
-                                <Link to="/languages">Languages</Link>
-                            </p>
-                            <p>
-                                <Link to="/decks">Decks</Link>
-                            </p>
-                            <p>
-                                <Link to="/decks">Login</Link>
-                            </p>
-                            <p>
-                                <Link to="/decks">Register</Link>
-                            </p>
+                            <p>Designed, Coded, and Created by Ethan Degenhardt</p>
+                            <p>ethandeg1996@gmail.com</p>
+                            <p>(636) 373-3435</p>
                         </div>
 
                     </div>
