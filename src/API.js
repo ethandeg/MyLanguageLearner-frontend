@@ -147,9 +147,7 @@ class API {
     }
 
     static async changePassword(data) {
-        console.log("WE ARE CHANGING PASSWORDS")
         const res = await this.request(`auth`, data, "patch")
-        console.log(res)
         return res
     }
 
