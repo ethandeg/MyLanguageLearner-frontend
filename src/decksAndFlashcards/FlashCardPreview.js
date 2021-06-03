@@ -64,11 +64,14 @@ const FlashCardPreview = ({card, timer, message}) => {
             {editMode 
             
             ?
-             <form onSubmit = {handleSubmit}>
-                 <input type="text" name="flashFront" id="flashFront" value={formData.flashFront} onChange={handleChange} />
-                 <input type="text" name="flashBack" id="flashBack" value={formData.flashBack} onChange={handleChange} />
-                 <button className="button is-info is-outlined">Save</button>
+             <form onSubmit = {handleSubmit} className='p-6'>
+                 <div className="container">
+                 <input className="input mb-1" type="text" name="flashFront" id="flashFront" value={formData.flashFront} onChange={handleChange} />
+                 <input className="input mb-1" type="text" name="flashBack" id="flashBack" value={formData.flashBack} onChange={handleChange} />
+                 <button style={{float:'right'}} className="button is-info is-outlined is-small">Save</button>
+                 </div>
              </form>
+
             :
             <div className="card-content has-text-centered p-6">
                 {card.frontSide}

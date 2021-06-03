@@ -83,7 +83,7 @@ const Home = () => {
             </section>
 
         <section className="hero is-secondary mb-6">
-            <h1 className="title is-3 has-text-info has-text-centered">See Our large selection of languages!</h1>
+            <h1 className="title is-3 has-text-info has-text-centered">See our large selection of languages!</h1>
 
                 <div className="columns is-multiline is-mobile">
                 

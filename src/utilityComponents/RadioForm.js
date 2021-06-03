@@ -21,10 +21,10 @@ const RadioForm = ({submit, values, name,primaryKey, label}) => {
     return (
         <form onSubmit={handleSubmit}>
             
-            {values.map(val => (
+            {values.map((val,i) => (
                 <div className="control" key={val[primaryKey]}>
                   <label className="radio">
-                  <input type="radio" value={val[primaryKey]} onChange={handleChange} id={name} name={name} /> 
+                  <input type="radio" value={val[primaryKey]} onChange={handleChange} id={`${name}-${i}`} name={name} /> 
                   <strong>{val[label]}</strong>
                   </label>
                  </div>

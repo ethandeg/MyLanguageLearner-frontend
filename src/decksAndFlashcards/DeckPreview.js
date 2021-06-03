@@ -37,7 +37,7 @@ const DeckPreview = ({timer, message}) => {
             <>
 
 
-                <div className="container mt-6">
+                <div className="container my-6">
                 <h1 className="title is-3 has-text-primary">{deck.name}</h1>
                     <Link className="button is-primary is-outlined" to={`/decks/${deck.id}/learn`}>Start Learning!</Link>
                     

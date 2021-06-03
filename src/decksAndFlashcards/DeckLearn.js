@@ -1,9 +1,4 @@
-//userflow - 
-//route comes here with a dedicated deck id
-//ping for flashcards, and map through all of them creating them
-//show one on page at a time, and allow to flip the card
-//once done, display a button to start over or exit
-//how to make carosel - https://www.w3schools.com/howto/howto_js_slideshow.asp
+import {Link} from "react-router-dom"
 import {useParams} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {useEffect, useState} from "react"
@@ -31,6 +26,19 @@ const DeckLearn = () => {
 
 
     try {
+        if(!deck.cards.length) return (
+            <div className="container mt-6 p-6">
+            <div className="columns is-centered">
+
+                <h2 className="title has-text-info is-3">You Don't Have Any Cards in This Deck!</h2>
+                <div>
+                <Link to={`/decks/${deck.id}`} className="button is-info is-pulled-left ml-2">Create Some</Link>
+                </div>
+               
+                    
+            </div>                    
+        </div> 
+        )
         return (
             <div className="container mt-6 p-6">
                 
@@ -51,6 +59,7 @@ const DeckLearn = () => {
 
                             <h2 className="title has-text-info is-3">You Have Finished Studying!</h2>
                             <button className="button is-info is-pulled-left ml-2" onClick={startOver}>Start Over</button>
+                            <Link to={`/decks/${deck.id}`} className="button is-primary is-outlined is-pulled-left ml-2">Go back to {deck.name}</Link>
                                 
                         </div>                    
                     </div>

@@ -24,7 +24,7 @@ const Learn = () => {
     }, [dispatch, user, languageCode])
     try{
         return (
-            <div className="container">
+            <div className="container mb-6">
                 <h1 className="title is-2 has-text-primary has-text-centered my-6">{userLanguage.name}</h1>
                 {units && units.map(unit => (
                     <Units unit={unit} key={unit.id} languageCode={languageCode}/>

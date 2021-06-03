@@ -32,7 +32,8 @@ const LanguageList = ({timer, message}) => {
     const arrayLangs = useSelector(store => store.userLanguages.map(lang => lang.languageCode))
     
     return (
-        <div className="container mt-6">
+        <div className="container my-6">
+            <h1 className="title is-2 has-text-primary has-text-centered">Our Languages</h1>
             <div className="columns is-mobile is-multiline">
                 {languages && languages.map(lang => (
                     arrayLangs.includes(lang.code)
