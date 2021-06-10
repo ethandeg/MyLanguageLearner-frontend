@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Home from './Home';
+import HowItWorks from './HowItWorks';
 import {Provider} from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
 import thunk from "redux-thunk"
@@ -11,16 +11,17 @@ const store = createStore(
       applyMiddleware(thunk)
     )
   );
-const component = render(<Provider store={store}><BrowserRouter><Home /></BrowserRouter>  </Provider>);
+const component = render(<Provider store={store}><BrowserRouter><HowItWorks /></BrowserRouter>  </Provider>);
+
 //smoke test
 test('renders without crashing', () => {
-  component
-
-});
-
+    component
+  
+  });
 
 //snapshot test
-test("matches snapshot", () => {
+
+test('should match the snapshot', () => {
     const {asFragment} = component
     expect(asFragment()).toMatchSnapshot()
 })

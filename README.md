@@ -36,3 +36,10 @@ To get started:
 * clone the repository
 * npm install
 * npm start
+
+## Tests
+
+To run tests
+* go to root directory
+* type in npm test
+* see all of the greens : )
