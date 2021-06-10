@@ -2,6 +2,8 @@
 
 Best app for learning traveling/beginner phrases and words!
 
+## See it deployed at - http://mylanguagelearner.surge.sh
+
 ## Uses
 
 This app is for:
@@ -27,3 +29,10 @@ This app is for:
 * Bulma
 * JavaScript
 * Axios
+
+## Installation
+To get started:
+* first make sure you follow the steps to install the backend at - https://github.com/ethandeg/MyLanguageLearner
+* clone the repository
+* npm install
+* npm start
