@@ -15,7 +15,7 @@ const Home = () => {
                         <h2 className="subtitle is-4">Your One-Stop Shop Language Preperation Tool for Traveling</h2>
                         <div className="mt-6">
                             <Link to="/register" className="button is-warning is-light is-outlined mr-1">Get Started</Link>
-                            <a href="#how-works" className="button is-info is-light is-outlined ml-1">See more first</a>
+                            <Link to="/how-it-works" className="button is-info is-light is-outlined ml-1">See more first</Link>
                         </div>
                     </div>
                 </div>

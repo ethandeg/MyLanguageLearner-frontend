@@ -55,7 +55,9 @@ const Nav = ({ logout, timer, message }) => {
                         </NavLink>       
                         </>             
                     }
-
+                    <NavLink className="navbar-item" to="/how-it-works">
+                                            How It Works
+                                </NavLink>
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
